@@ -1,0 +1,695 @@
+:root {
+    --main-color: #0e3197;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    margin: 0;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 16px;
+}
+
+body {
+    border-top: 16px solid var(--main-color);
+}
+
+.hidden { 
+    display: none !important; 
+}
+
+h1 {
+    margin-bottom: 0;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 5rem;
+}
+
+h2 {
+    margin: 0;
+    color: #555;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.25rem;
+}
+
+h3 {
+    margin: 2.5rem 0 1.25rem;
+    border-bottom: 1px solid #777;
+    color: #333;
+    font-size: 2rem;
+}
+
+.font-size-large {
+    font-size: 1.25rem;
+}
+
+.callout {
+    font-size: 1.3rem;
+}
+
+h2.callout {
+    margin: 2rem 0;
+    color: black;
+    font-size: 2rem;
+    letter-spacing: normal;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.spacing-75 {
+    margin: 0 0 0.75rem;
+}
+
+.spacing-125 {
+    margin: 0 0 1.25rem;
+}
+.spacing-2 {
+    margin: 0 0 2rem 0;
+}
+.spacing-3 {
+    margin: 0 0 3rem 0;
+}
+
+.spacing-pad-left-1-2 {
+    padding-left: 1.2rem;
+}
+
+ol {
+    padding: 0;
+    list-style-position: inside;
+}
+@media screen and (min-width: 550px) {
+    ol {
+        list-style-position: outside;
+    }
+}
+
+form, .wrapper {
+    max-width: 768px;
+    margin: 0 auto 6rem;
+    padding: 0 1rem;
+    overflow-x: hidden;
+}
+
+hr {
+    margin: 1.75rem 0;
+    border: 0;
+    border-top: 4px dotted #CCC;
+}
+
+label {
+    display: block;
+}
+
+label.inline {
+    display: inline-block;
+}
+
+input[type="text"], input[type="number"], input[type="email"], input[type="tel"] {
+    width: 100%;
+    max-width: 768px;
+    padding: 0.125rem 0.5rem;
+    margin: 0 0 0.75rem 0;
+    border: 1px solid #000;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+}
+@media screen and (min-width: 550px) {
+    input[type="text"], input[type="number"], input[type="email"], input[type="tel"] {
+        margin: 0 1rem 0.75rem 0;
+    }
+}
+
+input[type="text"].spacing-0, input[type="number"].spacing-0 {
+    margin: 0;
+}
+
+textarea {
+    width: 100%;
+    max-width: 768px;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+}
+
+input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    margin: 0 0.5rem 0 0;
+    accent-color: var(--main-color);
+}
+
+input[type="radio"] {
+    width: 30px;
+    height: 30px;
+    accent-color: var(--main-color);
+}
+
+input[type="button"] {
+    cursor: pointer;
+}
+
+.button-wrapper input { 
+    display: block;
+}
+
+.button-wrapper input.basic {
+    display: block;
+    background: none;
+    padding: 0.75rem 1.25rem;
+    margin: 0 3rem 0 0;
+    border: 1px solid #0070ff;
+    border-radius: 1rem;
+    color: var(--main-color);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.125rem;
+    text-transform: uppercase;
+} 
+
+.button-wrapper input[type="submit"] {
+    background-color: var(--main-color);
+    border: 2px solid #0070ff;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.required {
+    color: red;
+}
+
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.card {
+    border: 3px solid #000;
+    border-radius: 1rem;
+    margin: 1.25rem 0;
+    padding: 1.25rem;
+}
+
+.print-card {
+    width: 450px;
+    border: 1px solid black;
+}
+.print-card > p, .print-card > div {
+    margin: 0.25rem 0.5rem;
+}
+
+.print-card .card-number {
+    padding: 0.3rem 0.5rem 0.3rem 0;
+    font-size: 1.5rem;
+}
+
+.print-card input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.print-card .key {
+    flex-basis: 90px;
+    color: #484848;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+
+.artworkTable .checkboxcontainer {
+    margin: 0.75rem 0 0 0;
+}
+
+
+
+.dollar-sign {
+    font-size: 1.25rem;
+}
+
+.flex-0.dollar-sign {
+    padding-right: 0.5rem;
+}
+
+.titleChkNoValid > input[type="number"] {
+    border: 0;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.total-container {
+    font-size: 2rem;
+    font-weight: 700;
+}
+.total-container .dollar-sign {
+    font-size: 2rem;
+}
+
+
+
+/* Helpers */
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex.flex-column {
+    flex-direction: column;
+}
+.flex.align-center {
+    align-items: center;
+}
+.flex.no-wrap {
+    flex-wrap: nowrap;
+}
+
+.flex > div {
+    flex: 1 1 100%;
+    padding: 0;
+}
+@media screen and (min-width: 550px) {
+    .flex > div {
+        flex: 1 1 auto;
+        padding: 0 1rem 0 0;
+    }
+}
+
+.flex > div.spacing-0 {
+    padding: 0;
+    margin: 0;
+} 
+
+.flex > div.flex-0 {
+    flex: 0 0 auto;
+}
+
+.flex > div:last-child {
+    padding: 0;
+}
+
+.alert {
+    display: none;
+    padding: 1rem;
+    border: 3px solid lightblue;
+    border-radius: 0.3rem;
+}
+
+.alert.error {
+    border-color: red;
+}
+
+
+/* Old Code */
+
+.feeTip {
+    position: relative;
+    display: inline-block;
+}
+
+.feeTip .feeTiptext {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    border-radius: 3px;
+    padding: 2px 0;
+    position: absolute;
+    top: -5px;
+    left: 140%;
+    z-index: 1;
+}
+
+.feeTip .feeTiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -7px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+
+.nameTipValid {
+    position: relative;
+}
+
+.nameTipValid .nameEntryTiptext {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    border-radius: 3px;
+    padding: 2px 0;
+    position: absolute;
+    top: 25px;
+    right: 10%;
+    z-index: 1;
+}
+
+.nameTipValid .nameValidtext {
+    visibility: hidden;
+    padding: 1rem;
+    border: 3px solid red;
+    border-radius: 0.3rem;
+}
+
+.priceTipValid {
+    position: relative;
+}
+/* .priceTipValid label {
+    margin: 0 0 0 0.5rem;
+} */
+
+.priceTipValid .priceTiptext {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    border-radius: 3px;
+    padding: 2px 0;
+    position: absolute;
+    top: -7px;
+    right: 140%;
+    z-index: 1;
+}
+
+.priceTipValid .priceTiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -7px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+
+.priceTipValid .priceValidtext {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 3px;
+    border-color: red;
+    border-radius: 5px;
+    padding: 2px 0;
+    position: absolute;
+    top: -5px;
+    right: 130%;
+    z-index: 1;
+}
+
+.priceTipValid .priceValidtext::after {
+    content: "";
+    position: absolute;
+    top: 60%;
+    right: -15px;
+    margin-top: -7px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent red;
+}
+
+.titleChkNoValid {
+    position: relative;
+}
+.titleChkNoValid > div, .titleChkNoValid > div:last-child {
+    padding-bottom: 1rem;
+}
+.titleChkNoValid label {
+    position: relative;
+    top: 0.5rem;
+    margin: 0 0 0 0.5rem;
+}
+.titleChkNoValid label > div {
+    line-height: 0.5rem;
+}
+.titleChkNoValid small {
+    display: inline-block;
+    /*max-width: 170px;*/
+    font-size: 0.85rem;
+    line-height: 1rem;
+}
+#entFeeValidChk {
+    margin: 1rem 0;
+    font-size: 1rem;
+}
+#payMethValidChk {
+    margin: 1rem 0;
+    font-size: 1rem;
+}
+
+.titleChkNoValid .titleValidtext {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 3px;
+    border-color: red;
+    border-radius: 5px;
+    padding: 2px 0;
+    position: absolute;
+    top: -5px;
+    left: 102%;
+    z-index: 1;
+}
+
+.titleChkNoValid .titleValidtext::after {
+    content: "";
+    position: absolute;
+    top: 60%;
+    left: -15px;
+    margin-top: -7px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent red transparent transparent;
+}
+
+.EntFeeValidtext {
+    display: none;
+    background-color: white;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 3px;
+    border-color: red;
+    border-radius: 5px;
+    padding: 2px 0;
+}
+
+.titleChkNoValid .EntFeeValidtext::after {
+    content: "";
+    position: absolute;
+    top: 25%;
+    left: -15px;
+    margin-top: -7px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent red transparent transparent;
+}
+
+.titleChkNoValid .ChkNoValidtext {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 3px;
+    border-color: red;
+    border-radius: 5px;
+    padding: 2px 0;
+    position: absolute;
+    top: -5px;
+    left: 150%;
+    z-index: 1;
+}
+
+.titleChkNoValid .ChkNoValidtext::after {
+    content: "";
+    position: absolute;
+    top: 60%;
+    left: -15px;
+    margin-top: -7px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent red transparent transparent;
+}
+
+.dimensionValidTxt {
+    visibility: hidden;
+    background-color: white;
+    background-image: linear-gradient(white, LightGray);
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 2px;
+    border-color: red;
+    border-radius: 3px;
+    padding: 2px 0;
+    position: absolute;
+    top: -7px;
+    right: 140%;
+    z-index: 1;
+}
+
+.tooltip {
+    position: relative;
+}
+.tooltip > input[type="text"]{
+    margin: 0;
+    border-right: 0;
+    border-radius: 0.3rem 0 0 0.3rem;
+}
+
+.tooltip > select {
+    padding: 0 0.5rem;
+    border-radius: 0 0.3rem 0.3rem 0;
+}
+
+    .tooltip .tooltiptext {
+    visibility: hidden;
+    color: black;
+    background-color: white;
+    background-image: linear-gradient(white, LightGray);
+    text-align: center;
+    white-space: nowrap;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    border-radius: 2px;
+    padding: 2px 10px;
+    position: absolute;
+    left: 110%;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.checkboxcontainer {
+    display: flex;
+    align-items: center;
+    margin: 1.75rem 0;
+}
+
+
+.checkboxcontainer > span {
+    padding: 3px 0 0 0;
+}
+
+/* .checkboxcontainer {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-bottom: 5px;
+    width: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+} */
+
+
+/* Hide the browser's default checkbox */
+
+/* .checkboxcontainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+} */
+
+
+/* Create a custom checkbox */
+
+.checkmark {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    height: 17px;
+    width: 17px;
+    background-color: #fff;
+    border: solid black;
+    border-width: 1px 1px 1px 1px;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.checkboxcontainer input:checked~.checkmark:after {
+    display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.checkboxcontainer .checkmark:after {
+    left: 5px;
+    top: 3px;
+    width: 4px;
+    height: 8px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
