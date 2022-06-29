@@ -4,13 +4,13 @@ ini_set('display_errors', 'on');
 
 if(isset($_POST['submitted']))
 {
-    // $to = "mpsgs100@gmail.com";
-    $to = "carey@careyestes.com";
+    $to = "mpsgs100@gmail.com";
+    // $to = "carey@careyestes.com";
     $subject = "MPSGS Contact Submission";
     $name = $_POST["name"];
     $email = $_POST["email"];
     $message = $_POST["message"];
-    $mailMessage = $email . "has contacted you.\r\n" . $message;
+    $mailMessage = $email . " has contacted you.\r\n\r\n" . $message;
     $mailCondition = mail($to, $subject, $mailMessage);
 }
 ?>
