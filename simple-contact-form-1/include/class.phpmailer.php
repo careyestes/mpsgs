@@ -32,7 +32,6 @@
  */
 
 class PHPMailer {
-
   /////////////////////////////////////////////////
   // PROPERTIES, PUBLIC
   /////////////////////////////////////////////////
@@ -322,6 +321,7 @@ class PHPMailer {
    * @return void
    */
   function AddAddress($address, $name = '') {
+    var_dump("here");
     $cur = count($this->to);
     $this->to[$cur][0] = trim($address);
     $this->to[$cur][1] = $name;
