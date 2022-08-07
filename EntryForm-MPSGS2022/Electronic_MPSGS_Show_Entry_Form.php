@@ -10,7 +10,7 @@
     $total = $_POST["44Total"];
 
     // who are we sending this to?
-    $to = "miniartsupply@gmail.com, mpsgsfees@gmail.com";
+    $to = "miniartsupply@gmail.com, mpsgsfees@gmail.com, carey@careyestes.com";
 
     // create a subject line that includes the artist's name
     
