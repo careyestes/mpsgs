@@ -290,11 +290,11 @@
                 var total = "<?php echo $total; ?>";
 
                 if (payMethod == "cash" && document.getElementById("conditionalContainer")) {
-                    document.getElementById("conditionalContainer").innerHTML = "<p>If paying by cash or check (made payable to MPSGS), mail with a copy of entry form to: <br /><b>MPSGS Treasurer</b><br />PO BOX 281<br />Simpsonville, MD 21150-0281</p>";
+                    document.getElementById("conditionalContainer").innerHTML = "<p>If paying by cash or check (made payable to MPSGS), mail to: <br /><b>MPSGS Treasurer</b><br />PO BOX 281<br />Simpsonville, MD 21150-0281</p>";
                 }
                 
                 if (payMethod == "check" && document.getElementById("conditionalContainer")) {
-                    document.getElementById("conditionalContainer").innerHTML = '<p>If paying by cash or check (made payable to MPSGS), mail with a copy of entry form to: <br /><b>MPSGS Treasurer</b><br />PO BOX 281<br />Simpsonville, MD 21150-0281</p><p>Include your check number: <?php echo $_POST["45ChkNo"] ?></p>';
+                    document.getElementById("conditionalContainer").innerHTML = '<p>If paying by cash or check (made payable to MPSGS), mail to: <br /><b>MPSGS Treasurer</b><br />PO BOX 281<br />Simpsonville, MD 21150-0281</p><p>Include your check: No. <?php echo $_POST["45ChkNo"] ?></p>';
                 }
                 
                 if (payMethod == "PayPal" || payMethod == "altPayPal") {
