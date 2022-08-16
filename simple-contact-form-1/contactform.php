@@ -39,30 +39,22 @@ if(isset($_POST['submitted']))
             <input type='text'  class='spmhidip' name='' />
             </p>
                 <blockquote> 
-                    <div class='short_explanation' align="left"><font face="Times New Roman, Times, serif" color="006699"><b><font size="4">Hello! 
-                    <br>
-                    <br>
-                    Thank you for your interest in the MPSGS. If you would like to be on the 
-                    <br>
-                    MPSGS mailing list for the prospectus and exhibit invitation, please let 
-                    us know. <br>
-                    <br>
-                    If you just want an invitation to the show, great! We love new patrons.<br>
-                    Please let us know in your message.</font></b></font>
-                    </div>
-                    <div class='short_explanation' align="left"><font face="Times New Roman, Times, serif" color="006699"><b><font size="4"><br>
-                        </font></b></font><font face="Times New Roman, Times, serif" color="006699"><b><font size="4"><br>
-                        </font></b></font><font face="Times New Roman, Times, serif" color="006699"><b><font size="4"><br>
-                        If you have any questions, please let us know. <br>
-                        You can also </font></b></font><font face="Times New Roman, Times, serif" color="006699"><b><font size="4">send 
-                        an email to mpsgs100@gmail.com. <br>
-                        <br>
-                        Thank you!<br>
-                        <br>
-                        </font><font color="006699" size="3" face="Times New Roman, Times, serif"><b>* 
-                        required fields<br>
-                        </b></font><font size="4"><br>
-                        </font></b></font>
+                    <div class='short_explanation' style="max-width: 760px;" align="left">
+                      <font face="Times New Roman, Times, serif" color="006699">
+                          <b>
+                            <font size="4">Hello! 
+                              <br>
+                              Thank you for your interest in the MPSGS.<br>
+                              <br>
+                              If you would like to be on the MPSGS mailing list for the prospectus and exhibit invitation, or if you just want an invitation to the show, great!  We love new patrons.  Please fill in the boxes below, or send a separate email to <a href="mailto:mpsgs100@gmail.com">mpsgs100@gmail.com</a>.<br>
+                              Thank you!<br>
+                              <br>
+                              <br>
+                            </font>
+                            <font color="006699" size="3" face="Times New Roman, Times, serif">
+                              <b>* required fields<br>
+                              </b>
+                            </font>
                     </div>
             
                     <div class='container' align="left"> 
