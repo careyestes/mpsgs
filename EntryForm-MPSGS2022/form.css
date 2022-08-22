@@ -612,13 +612,13 @@ input[type="button"] {
 
 .checkboxcontainer {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     margin: 1.75rem 0;
 }
 
 
 .checkboxcontainer > span {
-    padding: 3px 0 0 0;
+    padding: 5px 0 0 0;
 }
 
 /* .checkboxcontainer {
