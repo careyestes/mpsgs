@@ -12,7 +12,7 @@ PARTICULAR PURPOSE.
 
 @copyright html-form-guide.com 2010
 */
-require_once("PHPMailer.php");
+require_once("class.phpmailer.php");
 
 /*
 Interface to Captcha handler
@@ -41,9 +41,9 @@ class FGContactForm
     var $arr_conditional_receipients;
     var $fileupload_fields;
     var $captcha_handler;
-    
+
     var $mailer;
-    
+
     function FGContactForm()
     {
         $this->receipients = array();
@@ -65,7 +65,6 @@ class FGContactForm
 
     function AddRecipient($email,$name="")
     {
-        var_dump($this);
         $this->mailer->AddAddress($email,$name);
     }
 
