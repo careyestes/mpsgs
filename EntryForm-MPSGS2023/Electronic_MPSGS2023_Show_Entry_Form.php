@@ -98,7 +98,7 @@
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
         $headers .= "From: miniartsupply@gmail.com" . "\r\n";
         $headers .= "Reply-To: miniartsupply@gmail.com" . "\r\n";
-        $userEmailData = "Dear Artist,\r\n\r\n Thank you for your online Entry Form submission to our MPSGS Exhibit 2022.  We look forward to seeing your artworks!  If you have any questions or comments, please contact me at miniartsupply@gmail.com.\r\n\r\n\r\nNancy Still\r\nPresident\r\nThe Miniature Painters, Sculptors &\r\nGravers Society of Washington, DC\r\nwww.mpsgs.org\r\n";
+        $userEmailData = "Dear Artist,\r\n\r\nThank you for your submission to our MPSGS Exhibit 2023.  We look forward to seeing your artworks!  If you have any questions or comments, please contact me at miniartsupply@gmail.com.\r\n\r\n\r\nNancy Still\r\nPresident\r\nThe Miniature Painters, Sculptors &\r\nGravers Society of Washington, DC\r\nwww.mpsgs.org\r\n";
 
         if (strlen($LastName) <= 0) {     //    if the artist has not entered a last name
 
@@ -134,7 +134,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
         <script src="html2canvas.js?v06-22-2022"></script> 
         <link rel="stylesheet" href="form.css?v04-03-2023">
-        <link rel="stylesheet" href="print.css?v04-03-2023">
+        <link rel="stylesheet" href="print.css?v04-24-2023">
     </head>
     <body class="confirmation-page">
         <div class="wrapper">
@@ -204,7 +204,7 @@
                             ?>
                                 
                             <div class="print-card">
-                                <div style="font-size: 14px;text-align:center;margin: 0.75rem 0 0;">MPSGS <?php echo $currentYear ?>, 90th Annual Exhibition</div>
+                                <div class="title" style="">MPSGS <?php echo $currentYear ?>, 90th Annual Exhibition</div>
                                 <div class="flex no-wrap align-center">
                                     <div class="flex-0 card-number"><?php echo $i ?>. </div>
                                     <div class="flex flex-0 no-wrap align-center">
@@ -220,8 +220,8 @@
                                     </div>
                                     <div class="flex no-wrap align-center">
                                         <span class="flex-0" style="padding-right: 0.3rem;">MPSGS use: </span>
-                                        <span class="flex-0" style="display: inline-block; width:30px; height:22px; border: 1px solid black;margin-right: 0.3rem;"></span>
-                                        <span class="flex-0" style="display: inline-block; width:101px; height:22px; border: 1px solid black;"></span>
+                                        <span class="flex-0" style="display: inline-block; width:2em; height:1.4em; border: 1px solid black;margin-right: 0.3rem;"></span>
+                                        <span class="flex-0" style="display: inline-block; width:6.35em; height:1.4em; border: 1px solid black;"></span>
                                     </div>
                                 </div>
                                 <p class="flex no-wrap align-center"><span class="key">Artist:</span> <span><?php echo $_POST["01FirstName"] ?> <?php echo $_POST["99MidIni"] ?> <?php echo $_POST["02LastName"] ?> <?php echo $_POST["100NameSuf"] ?></span></p>
@@ -287,7 +287,7 @@
 
                     setTimeout(function() {
 
-                        pdf.save("2022-MPSGS-Artwork-Tags.pdf");
+                        pdf.save("2023-MPSGS-Artwork-Tags.pdf");
 
                     }, 0);
 

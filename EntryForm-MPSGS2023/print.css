@@ -12,7 +12,11 @@
 
     body div.print-card {
         display: block;
-        width: 400px;
+        width: 280px;
+        font-size: 60%;
+    }
+    body div.print-card .title {
+        margin: 0;
     }
     .flex > div {
         flex: 1 1 auto;

@@ -71,8 +71,9 @@
                     </div>
                     
                     <div>
-                        <label for="State_Province">State/Province <span class="required">*</span></label>
-                        <select id="State_Province" autocomplete="address-level3" name="07State" required>
+                        <label for="State_Province">State/Province</label>
+                        <select id="State_Province" autocomplete="address-level3" name="07State">
+                            <option value="N/A">--</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
                             <option value="AZ">Arizona</option>
@@ -172,14 +173,15 @@
             <!-- ENTRY DETAILS SECTION -->
             <section id="receiverTable">
                 <h3>Entry Details</h3>
-
-                <p class="font-size-large text-align-center all-caps">Read Instructions First!</p>
-
-                <p id="footNote">List <strong>Medium</strong> of your work, <u><strong>not</strong></u> the award category. If the work is on ivorine, note that in the Medium block.</p>
-
-                <p id="dimensionMsg"><strong>Outside Dimensions:</strong> Type in whole inches & select fractions from the drop down. Please fill in dimensions as <strong>Height by Width</strong>. If it is a sculpture, fill dimensions as <strong>Height by Width by Depth</strong>.</p>
-
-                <p><strong>Printable</strong> tags will be generated <strong>after</strong> you submit your form.</p>
+                <div style="padding: 0.25rem 1.5rem; background: rgb(235,235,235);border-radius: 1rem;">
+                    <p class="font-size-large text-align-center all-caps">Read Instructions First!</p>
+    
+                    <p id="footNote">List <strong>Medium</strong> of your work, <u><strong>not</strong></u> the award category. If the work is on ivorine, note that in the Medium block.</p>
+    
+                    <p id="dimensionMsg"><strong>Outside Dimensions:</strong> Type in whole inches & select fractions from the drop down. Please fill in dimensions as <strong>Height by Width</strong>. If it is a sculpture, fill dimensions as <strong>Height by Width by Depth</strong>.</p>
+    
+                    <p><strong>Printable</strong> tags will be generated <strong>after</strong> you submit your form.</p>
+                </div>
 
                 <div id="worksCountValidChk" class="alert error">
                     <span id="worksCountValidMsg"></span>
@@ -544,14 +546,14 @@
                 <label for="Auxillary" class="checkboxcontainer">
                     <input id="Auxillary" type="checkbox" value="Yes" name="Auxillary" onchange="AuxillarySetup(event);">
                     <span>
-                        I am an <strong>Auxillary</strong> Member.<br>
+                        I am an <strong>Auxiliary</strong> Member.<br>
                     </span>
                 </label>
                 
                 <label for="Board" class="checkboxcontainer">
                     <input id="Board" type="checkbox" value="Yes" name="Board" onchange="BoardSetup(event);">
                     <span>
-                        I am an <strong>Board</strong> Member.<br>
+                        I am a <strong>Board</strong> Member.<br>
                     </span>
                 </label>
                 
@@ -669,10 +671,10 @@
                 <div id="Payment_Type_Container" class="priceTipValid font-size-large spacing-3">
                     <div class="spacing-75">Payment Method</div>
                     <div class="flex">
-                        <div class="flex align-center flex-0">
+                        <!-- <div class="flex align-center flex-0">
                             <input type="radio" id="paymentType1" name="40PayMethod" value="cash" onchange="payMethodHandler('payMeth')">
                             <label class="inline" for="paymentType1" style="position: relative;top: 2px;padding-left: 4px;">Cash</label>
-                        </div>
+                        </div> -->
                         <div class="flex align-center flex-0">
                             <input type="radio" id="paymentType2" name="40PayMethod" value="check" onchange="payMethodHandler('payMeth')">
                             <label class="inline" for="paymentType2" style="position: relative;top: 2px;padding-left: 4px;">Check</label>
@@ -764,32 +766,6 @@
                         </div>
                         
                     </div>
-        
-                    <!-- Other Paypal -->
-                    <!-- <div id="OtherPaypal_Type" class="paymentMethods" hidden>
-                        <p class="font-size-large text-align-center all-caps">Paypal Payment Instructions</p>
-                        <p>If paid via PayPal by someone other than the artist, type their name here: 
-                            <input type="text" name="190OtherPayPalName" maxlength=60 onchange="payMethodHandler('altPayPal')">and please make a note in PayPal.
-                        </p>
-                        
-                        <div class="priceTipValid">
-                            <div id="altPPalMsg" class="alert error">
-                                <span>Please type the actual PayPal payer's name.</span>
-                                <input type="button" value="OK" id="altPPalOkBtn" onclick="tipOK('altPPal')">
-                            </div>
-                            <div id="altPPalValidChk" class="alert error">
-                                <span id="altPPalValidMsg"></span>
-                                <input type="button" value="Edit" id="editAltPPalBtn" onclick="validationEditHandler('altPPal')">
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- Pay Later -->
-                    <!-- <div id="Later_Type" class="paymentMethods" hidden>
-                        <p class="font-size-large text-align-center all-caps">Paypal Payment Instructions</p>
-                        <p>You can pay later via Paypal if you prefer. Make a note of your total here and when you are ready to pay, login to Paypal and send your payment to mpsgsfees@gmail.com. 
-                        </p>
-                    </div> -->
                 </div>           
             </section>
 
