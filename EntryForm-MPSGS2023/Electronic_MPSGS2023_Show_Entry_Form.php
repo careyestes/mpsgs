@@ -12,8 +12,8 @@
     $paidDues = isset($_POST["42Dues"]) ? $_POST["42Dues"] : null;
 
     // who are we sending this to?
-    // $to = "miniartsupply@gmail.com, mpsgsfees@gmail.com, carey@careyestes.com";
-    $to = "carey@careyestes.com";
+    $to = "miniartsupply@gmail.com, mpsgsfees@gmail.com, carey@careyestes.com";
+    // $to = "carey@careyestes.com";
 
     // create a subject line that includes the artist's name
     
@@ -158,7 +158,7 @@
                 <?php if(!$duesOnly): ?>
                     <section id="Needs_Tags">
                         <h3>Include a return label</h3>
-                        <p>A return label must be included in the box of artworks, so we can get it back to you when the exhibition is over.</p>
+                        <p>A return label must be included in the box of artworks, so we can return your box to the correct address after the exhibition.</p>
 
                         <h3>Print out your tags</h3>
                         
@@ -303,11 +303,11 @@
                 var total = "<?php echo $total; ?>";
 
                 if (payMethod == "cash" && document.getElementById("conditionalContainer")) {
-                    document.getElementById("conditionalContainer").innerHTML = "<p>If paying by cash or check (made payable to MPSGS), mail to: <br /><b>MPSGS Treasurer</b><br />PO BOX 281<br />Simpsonville, MD 21150-0281</p>";
+                    document.getElementById("conditionalContainer").innerHTML = "<p>If paying by cash, mail to: <br /><b>MPSGS Treasurer</b><br />PO BOX 281<br />Simpsonville, MD 21150-0281</p>";
                 }
                 
                 if (payMethod == "check" && document.getElementById("conditionalContainer")) {
-                    document.getElementById("conditionalContainer").innerHTML = '<p>If paying by cash or check (made payable to MPSGS), mail to: <br /><b>MPSGS Treasurer</b><br />PO BOX 281<br />Simpsonville, MD 21150-0281</p><p>Include your check number: <?php echo (isset($_POST["45ChkNo"]) ? $_POST["45ChkNo"] : "") ?></p>';
+                    document.getElementById("conditionalContainer").innerHTML = '<p>If paying by check, make payable to MPSGS and mail to: <br /><b>MPSGS Treasurer</b><br />PO BOX 281<br />Simpsonville, MD 21150-0281</p><p>Include your check number: <?php echo (isset($_POST["45ChkNo"]) ? $_POST["45ChkNo"] : "") ?></p>';
                 }
                 
                 if (payMethod == "PayPal" || payMethod == "altPayPal") {
