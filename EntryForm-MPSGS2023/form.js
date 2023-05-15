@@ -873,19 +873,19 @@ function paypalInstructions() {
     document.getElementById("Later_Type").hidden = true;
 
     var paypalMethod = document.forms["showEntryForm"]["47paypalType"].value;
-    var otherName = document.forms["showEntryForm"]["190OtherPayPalName"].value;
+    var otherName = document.forms["showEntryForm"]["48OtherPayPalName"].value;
     console.log(paypalMethod);
     
     if(paypalMethod === "anotherPaypal") {
         document.getElementById("OtherPaypal_Type").toggleAttribute("hidden");
-        document.forms["showEntryForm"]["190OtherPayPalName"].disabled = false;
-        document.forms["showEntryForm"]["190OtherPayPalName"].value = gblOtherPPalName;
+        document.forms["showEntryForm"]["48OtherPayPalName"].disabled = false;
+        document.forms["showEntryForm"]["48OtherPayPalName"].value = gblOtherPPalName;
     } else {
         if (otherName.length > 0) {
-            gblOtherPPalName = document.forms["showEntryForm"]["190OtherPayPalName"].value;
+            gblOtherPPalName = document.forms["showEntryForm"]["48OtherPayPalName"].value;
         }
-        document.forms["showEntryForm"]["190OtherPayPalName"].value = "";
-        document.forms["showEntryForm"]["190OtherPayPalName"].disabled = true;    
+        document.forms["showEntryForm"]["48OtherPayPalName"].value = "";
+        document.forms["showEntryForm"]["48OtherPayPalName"].disabled = true;    
     }
     
     if(paypalMethod === "payLater") {
@@ -896,7 +896,7 @@ function paypalInstructions() {
 function payMethodHandler(mode) {
 
     var method = document.forms["showEntryForm"]["40PayMethod"].value;
-    var otherName = document.forms["showEntryForm"]["190OtherPayPalName"].value;
+    var otherName = document.forms["showEntryForm"]["48OtherPayPalName"].value;
     var chkNo = document.forms["showEntryForm"]["45ChkNo"].value;
     let total = document.forms["showEntryForm"]["44Total"].value;
     // let totalString = total.toString();
@@ -905,9 +905,9 @@ function payMethodHandler(mode) {
 
         case "init":
 
-            document.forms["showEntryForm"]["190OtherPayPalName"].value = "";
+            document.forms["showEntryForm"]["48OtherPayPalName"].value = "";
 
-            document.forms["showEntryForm"]["190OtherPayPalName"].disabled = true;
+            document.forms["showEntryForm"]["48OtherPayPalName"].disabled = true;
 
             document.forms["showEntryForm"]["45ChkNo"].value = "";
 
@@ -921,12 +921,14 @@ function payMethodHandler(mode) {
 
             if(method != "altPayPal") {
 
-                document.forms["showEntryForm"]["190OtherPayPalName"].disabled = true;
-
+                document.forms["showEntryForm"]["48OtherPayPalName"].disabled = true;
+                document.forms["showEntryForm"]["45ChkNo"].disabled = false;
+                
             }
-
+            
             if (method != "check") {
-
+                
+                document.forms["showEntryForm"]["48OtherPayPalName"].disabled = false;
                 document.forms["showEntryForm"]["45ChkNo"].disabled = true;
 
             }
@@ -956,19 +958,19 @@ function payMethodHandler(mode) {
                 if(method == "altPayPal") {
 
                     document.getElementById("OtherPaypal_Type").toggleAttribute("hidden");
-                    document.forms["showEntryForm"]["190OtherPayPalName"].disabled = false;
-                    document.forms["showEntryForm"]["190OtherPayPalName"].value = gblOtherPPalName;
+                    document.forms["showEntryForm"]["48OtherPayPalName"].disabled = false;
+                    document.forms["showEntryForm"]["48OtherPayPalName"].value = gblOtherPPalName;
 
                 } else {
 
                     if (otherName.length > 0) {
 
-                        gblOtherPPalName = document.forms["showEntryForm"]["190OtherPayPalName"].value;
+                        gblOtherPPalName = document.forms["showEntryForm"]["48OtherPayPalName"].value;
 
                     }
 
-                    document.forms["showEntryForm"]["190OtherPayPalName"].value = "";
-                    document.forms["showEntryForm"]["190OtherPayPalName"].disabled = true;
+                    document.forms["showEntryForm"]["48OtherPayPalName"].value = "";
+                    // document.forms["showEntryForm"]["48OtherPayPalName"].disabled = true;
 
                 }
 
@@ -1277,7 +1279,7 @@ function tipOK(tip) {
         case "altPPal":
 
             document.getElementById("altPPalMsg").style.display="none";
-            document.forms["showEntryForm"]["190OtherPayPalName"].focus();
+            document.forms["showEntryForm"]["48OtherPayPalName"].focus();
             break;
 
         case "chkNo":
@@ -1704,7 +1706,7 @@ function validateForm() {
     var entFee = "";
     var payMeth = "";
 
-    var altPPal = document.forms["showEntryForm"]["190OtherPayPalName"].value;
+    var altPPal = document.forms["showEntryForm"]["48OtherPayPalName"].value;
     var chkNo = document.forms["showEntryForm"]["45ChkNo"].value;
     var isRcvr = document.forms["showEntryForm"]["51IsReceiver"].checked;
     var feeTot = document.forms["showEntryForm"]["44Total"].value;
@@ -2049,7 +2051,7 @@ function validateForm() {
     if (payMeth == "altPayPal" && (altPPal == null || altPPal.length < 2)) {
 
         // disableFormInput();
-        ValidationEditFocus = "190OtherPayPalName";
+        ValidationEditFocus = "48OtherPayPalName";
         document.getElementById("altPPalValidChk").style.display = "block";
         document.getElementById("editAltPPalBtn").focus();
 

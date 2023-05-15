@@ -35,7 +35,7 @@
         
         //    loop through every field in the form
         foreach($_POST as $x => $x_value) {
-            
+
             //        filter the form data to prevent cross-site scripting exploits
             $x_value = trim($x_value, "\x00..\x1F");         //remove all leading and trailing ASCII control char's
             $x_value = trim($x_value);                       //remove all leading and trailing spaces and print directives (\t,\n,\r,...)
@@ -78,7 +78,7 @@
                     case "44Total": $txt[5] = $txt[0]; break;
                     case "40PayMethod": $txt[6] = $txt[0]; break;
                     case "50ReceiveByPayPal": $txt[7] = $txt[0]; break;
-                    case "190OtherPayPalName": $txt[8] = $txt[0]; break;
+                    case "48OtherPayPalName": $txt[8] = $txt[0]; break;
                     case "45ChkNo": $txt[9] = $txt[0]; break;
                     case "46Notes": $txt[10] = $txt[0]; break;
 
@@ -98,7 +98,7 @@
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
         $headers .= "From: miniartsupply@gmail.com" . "\r\n";
         $headers .= "Reply-To: miniartsupply@gmail.com" . "\r\n";
-        $userEmailData = "Dear Artist,\r\n\r\nThank you for your submission to our MPSGS Exhibit 2023.  We look forward to seeing your artworks!  If you have any questions or comments, please contact me at miniartsupply@gmail.com.\r\n\r\n\r\nNancy Still\r\nPresident\r\nThe Miniature Painters, Sculptors &\r\nGravers Society of Washington, DC\r\nwww.mpsgs.org\r\n";
+        $userEmailData = "Dear Artist,\r\n\r\nThank you for your submission to the MPSGS Exhibit 2023.  We look forward to seeing your artworks!  If you have any questions or comments, please contact me at miniartsupply@gmail.com.\r\n\r\n\r\nNancy Still\r\nPresident\r\nThe Miniature Painters, Sculptors &\r\nGravers Society of Washington, DC\r\nwww.mpsgs.org\r\n";
 
         if (strlen($LastName) <= 0) {     //    if the artist has not entered a last name
 
@@ -143,9 +143,9 @@
                 <?php if($duesOnly == "Yes"): ?>
                     <h1>Thank you for paying your dues.</h1>
                 <?php elseif($paidDues): ?>
-                    <h1>Thank you for your exhibit entry and dues payment.</h1>
+                    <h1>Thank you for your submission to the MPSGS Exhibit 2023 and dues payment.</h1>
                 <?php else: ?>
-                    <h1>Thank you for your exhibit entry.</h1>
+                    <h1>Thank you for your submission to the MPSGS Exhibit 2023.</h1>
                 <?php endif ?>
                 
                 <h2 class="callout"><u>But wait, you must do the following:</u></h2>
