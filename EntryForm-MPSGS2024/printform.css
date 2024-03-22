@@ -1,0 +1,22 @@
+@media print {
+    body {
+        padding: 0rem;
+    }
+
+    form {
+        max-width: none;
+        margin: 0 auto;
+        padding: 0 1rem;
+        overflow-x: hidden;
+    }
+
+    form > section:nth-of-type(1) hr:nth-of-type(2)  {
+        page-break-after: always;
+    }
+
+    .artworkTable > li:nth-of-type(1) {
+        page-break-after: always;
+    }
+
+    
+}

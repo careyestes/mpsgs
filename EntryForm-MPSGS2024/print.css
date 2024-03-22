@@ -1,0 +1,25 @@
+@media print {
+    body {
+        padding: 3rem;
+    }
+    h1, h2, h3, p, hr, div.button-wrapper {
+        display: none;
+    }
+
+    #paypal-button-container {
+        display: none;
+    } 
+
+    body div.print-card {
+        display: block;
+        width: 280px;
+        font-size: 60%;
+    }
+    body div.print-card .title {
+        margin: 0;
+    }
+    .flex > div {
+        flex: 1 1 auto;
+        padding: 0 1rem 0 0;
+    }
+ }

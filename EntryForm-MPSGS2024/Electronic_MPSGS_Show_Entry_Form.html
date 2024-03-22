@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>MPSGS Exhibit 2024 Entry Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="form.css?v04-01-2024">
+        <link rel="stylesheet" href="printform.css?v04-03-2024">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+        <script src="html2canvas.js?v04-01-2024"></script>  
+        <script src="form.js?v05-15-2024"></script>
+    </head>
+    <body onload="letterCodeLists(); feeTitles(); payMethodHandler('init'); document.forms['showEntryForm']['01FirstName'].focus();">
+
+        <form class="print-wrap page1" name="showEntryForm" id="electEntForm" method="post" action="Electronic_MPSGS2024_Show_Entry_Form.php" onkeydown="keyHandler(event)" onsubmit="return submitButtonHandler()">
+            <h1>MPSGS Exhibit 2024</h1>
+            <h2>ENTRY FORM</h2>
+            <p><strong>Failure to complete this form may result in your non-participation in the exhibit.</strong></p>
+
+            <!-- CONTACT SECTION -->
+            <section>
+                <h3>Contact Information</h3>
+                
+                <div class="flex">
+                    <div>
+                        <label for="First_Name">First Name <span class="required">*</span></label>
+                        <input id="First_Name" autocomplete="given-name" type="text" name="01FirstName" maxlength=50 value="" required />
+                    </div>
+                    
+                    <div>
+                        <label for="Middle_Initial">Middle Initial</label>
+                        <input id="Middle_Initial" type="text" name="99MidIni" maxlength=1 value="" />
+                    </div>
+                </div>
+                
+                <div class="flex">
+                    <div>
+                        <label for="Last_Name">Last Name <span class="required">*</span></label>
+                        <div class="nameTipValid">
+                            <input id="Last_Name" autocomplete="family-name" type="text" name="02LastName" maxlength=44 value="" required />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="Suffix">Name Suffix (Jr., II, etc.)</label>
+                        <input id="Suffix" autocomplete="honorific-suffix" type="text" name="100NameSuf" maxlength=7>
+                    </div>
+                </div>
+
+                <div id="nameValidChk" class="alert error">
+                    <span id="nameValidMsg"></span>
+                    <input id="editNameBtn" type="button" value="Edit" onclick="validationEditHandler('name')">
+                </div>
+
+                <hr>
+
+                <label for="Address_1">Address <span class="required">*</span></label>
+                <input id="Address_1" autocomplete="address-line1" type="text" name="04Addr1" maxlength=60 required>
+        
+                <label for="Address_2">Address 2</label>
+                <input id="Address_2" autocomplete="address-line2" type="text" name="05Addr2" maxlength=60 />
+        
+                <div class="flex">
+                    <div>
+                        <label for="City">City <span class="required">*</span></label>
+                        <input id="City" autocomplete="address-level2" type="text" name="06City" maxlength=50  required />
+                    </div>
+                    
+                    <div>
+                        <label for="State_Province">State/Province</label>
+                        <input id="State_Province" type="text" name="07State" />
+                    </div>
+                </div>
+                
+                <div class="flex">
+                    <div>
+                        <label for="Zipcode">Zip <span class="required">*</span></label>
+                        <input id="Zipcode" autocomplete="postal-code" type="text" name="09PostCode" maxlength=20 required />
+                    </div>
+                    <div>
+                        <label for="Country">Country</label>
+                        <input id="Country" autocomplete="country" type="text" name="08Country" maxlength=50 />
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="flex">
+                    <div>
+                        <label for="Phone_Number">Phone</label>
+                        <input id="Phone_Number" type="tel" name="10Phone" maxlength=50 />
+                    </div>
+                    <div>
+                        <label for="E-mail">Email <span class="required">*</span></label>
+                        <div class="nameTipValid">
+                            <input id="E-mail" type="email" name="11Email" maxlength=70 value="" required />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex">
+                    <div>
+                        <label for="Instagram">Instagram</label>
+                        <input id="Instagram" type="text" name="12Instagram" />
+                    </div>
+                    <div>
+                        <label for="Facebook">Facebook</label>
+                        <div class="nameTipValid">
+                            <input id="Facebook" type="text" name="13Facebook" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="contactValidChk" class="alert error">
+                    <span id="contactValidMsg"></span>
+                    <input type="button" value="Edit" id="editContactBtn" onclick="validationEditHandler('contact')">
+                    <input type="button" value="Skip" style="font-size: 67%;" id="contactValidskip" onclick = "printHandler()">
+                </div>
+
+                
+            </section>
+
+            <!-- ENTRY DETAILS SECTION -->
+            <section id="receiverTable">
+                <h3>Artwork Entry Details</h3>
+                <div style="padding: 0.25rem 1.5rem; background: rgb(235,235,235);border-radius: 1rem;">
+                    <p class="font-size-large text-align-center all-caps">Read Prospectus First!</p>
+    
+                    <p id="footNote">List <strong>Medium</strong> of your work, <u><strong>not</strong></u> the award category. If the work is on ivorine, note that in the Medium block.</p>
+    
+                    <p id="dimensionMsg"><strong>Outside Dimensions:</strong> Type in whole inches & select fractions from the drop down. Please fill in dimensions as <strong>Height by Width</strong>. If it is a sculpture, fill dimensions as <strong>Height by Width by Depth</strong>.</p>
+    
+                    <p><strong>Printable</strong> tags will be generated <strong>after</strong> you submit your form.</p>
+                </div>
+                
+                <div id="worksCountValidChk" class="alert error">
+                    <span id="worksCountValidMsg"></span>
+                    <input type="button" value="Edit" id="editWorksCountBtn" onclick="validationEditHandler('worksCount')">
+                    <input type="button" value="Skip" id="worksCountValidskip" onclick="printHandler()">
+                </div>
+
+                <hr>
+                
+                <label for="Receiver">Artwork mailed/delivered to (Your Receiver) <span class="required">*</span></label>
+                <span class="nameTipValid">
+                    <input id="Receiver" placeholder="Enter Receiver Name" type="text" name="12Receiver" maxlength=50 value="" required />
+                </span>
+                
+                <hr>
+
+                <div id="rcvrValidChk" class="alert error">
+                    <span id="rcvrValidMsg"></span>
+                    <span id="rcvrAlertMsg"></span>
+                    <input type="button" value="Edit" id="editRcvrBtn" onclick="validationEditHandler('rcvr')">
+                </div>
+
+                <ol id="artworkTable" class="flex flex-column artworkTable">
+                    
+                    <!-- Card One -->
+                    <li class="card">
+                        
+                        <label for="14Title1">Artwork Title</label>
+                        <div class="titleChkNoValid">
+                            <input id="14Title1" type="text" name="14Title1" maxlength=44 value="" />
+                        </div>
+                        <div id="title1ValidChk" class="alert error">
+                            <span id="title1ValidMsg"></span>
+                            <input type="button" value="Edit" id="editTitle1Btn" onclick="validationEditHandler('title1')">
+                            <input type="button" value="Skip" id="title1Validskip" onclick="printHandler()">
+                        </div>
+                        
+                        <label for="15Media1">
+                            <span>Medium / Sculpture Material</span>
+                        </label>
+                        <div class="nameTipValid">
+                            <input id="15Media1" type="text" name="15Media1" maxlength=35 value="" />
+                        </div>
+                        
+                        <div id="media1ValidChk" class="alert error">
+                            <span id="media1ValidMsg"></span>
+                            <input type="button" value="Edit" id="editMedia1Btn" onclick="validationEditHandler('media1')">
+                            <input type="button" value="Skip" id="media1Validskip" onclick="printHandler()">
+                        </div>
+                        
+                        <div class="flex align-center">
+                            <div>
+                                <label for="18Price1">$ Price</label>
+                                <div class="priceTipValid">
+                                    <input id="18Price1" type="text" name="18Price1" maxlength=6 value="" onchange="priceHandler('18Price1')">
+                                </div>
+                                <input type="text" name="191Dimensions1" style="display:none" value="">
+                            </div>
+                            <div class="flex-0">
+                                <label for="16Sculpture1" class="checkboxcontainer">
+                                    <input id="16Sculpture1" type="checkbox" name="16Sculpture1" value="Yes" onchange="dimensionDisplayHandler('16Sculpture1', '14Title1')">
+                                    <span>Is Sculpture</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div id="priceMsg1" class="alert error">
+                            <span id="priceMsg1Text"></span>
+                            <input type="button" value="OK" id="price1OkBtn" onclick="tipOK('price1')">
+                        </div>
+                        <div id="price1ValidChk" class="alert error">
+                            <span id="price1ValidMsg"></span>
+                            <input type="button" value="Edit" id="editPrice1Btn" onclick="validationEditHandler('price1')">
+                        </div>
+
+                        <div id="dimensionTable1">
+                            <div id="dimensionValidOk" style="display:none;border-style: solid;border-width: 2px;border-color: red;border-radius: 3px;background-image: linear-gradient(white, LightGray);">
+                                <span id="dimensionValidMsg">Please resolve issues with highlighted dimension(s)
+                                    <input type="button" value="OK" id="dimensionValidOkBtn" onclick="dimensionBtnHandler()">
+                                </span>
+                            </div>
+
+                            <div id="pictureDim1" class="flex spacing-75">
+                                <div>
+                                    <label for="fhighw1">Framed Height</label>
+                                    <span id="fhigh1" class="tooltip flex no-wrap">
+                                        <input type="text" id="fhighw1" name="fhighw1" maxlength=2 value="" onchange="DimensionHandler('fhigh1')" onclick="DimensionHandler('fhigh1')">
+                                        <select id="fhighf1" name="fhighf1" onchange="DimensionHandler('fhigh1')">
+                                        </select>
+                                    </span>
+                                </div>
+                                
+                                <div>
+                                    <label for="fwidew1">Framed Width</label>
+                                    <span id="fwide1" class="tooltip flex no-wrap">
+                                        <input type="text" id="fwidew1" name="fwidew1" maxlength=2 value="" onchange="DimensionHandler('fwide1')" onclick="DimensionHandler('fwide1')">
+                                        <select id="fwidef1" name="fwidef1" onchange="DimensionHandler('fwide1')">
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div id="fhighmsg1" class="alert error spacing-75"></div>
+                            <div id="fwidemsg1" class="alert error spacing-75"></div>
+                            
+                            <div id="sculptureDim1" class="flex no-wrap spacing-75" style="display:none;">
+                                <div>
+                                    <label for="shighw1">Height</label>
+                                    <span id="shigh1" class="tooltip flex no-wrap">
+                                        <input type="text" id="shighw1" name="shighw1" maxlength=2 value="" onchange="DimensionHandler('shigh1')" onclick="DimensionHandler('shigh1')">
+                                        <select id="shighf1" name="shighf1" onchange="DimensionHandler('shigh1')">
+                                        </select>
+                                    </span>
+                                </div>
+                                
+                                <div>
+                                    <label for="swidew1">Width</label>
+                                    <span id="swide1" class="tooltip flex no-wrap">
+                                        <input type="text" id="swidew1" name="swidew1" maxlength=2 value="" onchange="DimensionHandler('swide1')" onclick="DimensionHandler('swide1')">
+                                        <select id="swidef1" name="swidef1" onchange="DimensionHandler('swide1')">
+                                        </select>
+                                    </span>
+                                </div>
+                                
+                                <div>
+                                    <label for="sdeepw1">Depth</label>
+                                    <span id="sdeep1" class="tooltip flex no-wrap">
+                                        <input type="text" id="sdeepw1" name="sdeepw1" maxlength=2 value="" onchange="DimensionHandler('sdeep1')" onclick="DimensionHandler('sdeep1')">
+                                        <select id="sdeepf1" name="sdeepf1" onchange="DimensionHandler('sdeep1')"></select>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div id="shighmsg1" class="alert error spacing-75"></div>
+                            <div id="swidemsg1" class="alert error spacing-75"></div>
+                            <div id="sdeepmsg1" class="alert error spacing-75"></div>
+                        
+                        </div>
+                    </li>
+
+                    <!-- Card Two -->
+                    <li class="card">
+                        
+                        <label for="19Title2">Artwork Title</label>
+                        <div class="titleChkNoValid">
+                            <input id="19Title2" type="text" name="19Title2" maxlength=44 value="" />
+                        </div>
+                        <div id="title2ValidChk" class="alert error">
+                            <span id="title2ValidMsg"></span>
+                            <input type="button" value="Edit" id="editTitle2Btn" onclick="validationEditHandler('title2')">
+                            <input type="button" value="Skip" id="title2Validskip" onclick="printHandler()">
+                        </div>
+                        
+                        <label for="20Media2">Medium / Sculpture Material</label>
+                        <div class="nameTipValid">
+                            <input id="20Media2" type="text" name="20Media2" maxlength=35 value="" />
+                        </div>
+                        
+                        <div id="media2ValidChk" class="alert error">
+                            <span id="media2ValidMsg"></span>
+                            <input type="button" value="Edit" id="editMedia2Btn" onclick="validationEditHandler('media2')">
+                            <input type="button" value="Skip" id="media2Validskip" onclick="printHandler()">
+                        </div>
+
+                        <div class="flex align-center">
+                            <div>
+                                <div class="priceTipValid">
+                                    <label for="23Price2">$ Price</label>
+                                    <input id="23Price2" type="text" name="23Price2" maxlength=6 value="" onchange="priceHandler('23Price2')">
+                                </div>
+                                <input type="text" name="192Dimensions2" style="display:none" value="">
+                            </div>
+                            
+                            <div class="flex-0">
+                                <label for="21Sculpture2" class="checkboxcontainer">
+                                    <input id="21Sculpture2" type="checkbox" name="21Sculpture2" value="Yes" onchange="dimensionDisplayHandler('21Sculpture2','19Title2')">
+                                    <span>Is Sculpture</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div id="priceMsg2" class="alert error">
+                            <span id="priceMsg2Text"></span>
+                            <input type="button" value="OK" id="price2OkBtn" onclick="tipOK('price2')">
+                        </div>
+                        <div id="price2ValidChk" class="alert error">
+                            <span id="price2ValidMsg"></span>
+                            <input type="button" value="Edit" id="editPrice2Btn" onclick="validationEditHandler('price2')">
+                        </div>
+                        
+                        <div id="dimensionTable2">
+                            
+                            <div id="pictureDim2" class="flex spacing-75">
+
+                                <div>
+                                    <label for="fhighw2">Framed Height:</label>
+                                    <span id="fhigh2" class="tooltip flex no-wrap">
+                                        <input type="text" id="fhighw2" name="fhighw2" maxlength=2 value="" onchange="DimensionHandler('fhigh2')" onclick="DimensionHandler('fhigh2')">
+                                        <select id="fhighf2" name="fhighf2" onchange="DimensionHandler('fhigh2')">
+                                        </select>
+                                    </span>
+                                </div>
+                                
+                                <div>
+                                    <label for="fwidew2">Framed Width: </label>
+                                    <span id="fwide2" class="tooltip flex no-wrap">
+                                        <input type="text" id="fwidew2" name="fwidew2" maxlength=2 value="" onchange="DimensionHandler('fwide2')" onclick="DimensionHandler('fwide2')">
+                                        <select id="fwidef2" name="fwidef2" onchange="DimensionHandler('fwide2')">
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div id="fhighmsg2" class="alert error spacing-75"></div>
+                            <div id="fwidemsg2" class="alert error spacing-75"></div>
+                        
+                            <div id="sculptureDim2" class="flex no-wrap spacing-75" style="display:none;">
+                                <div>
+                                    <label for="shighw2">Height</label>
+                                    <span id="shigh2" class="tooltip flex no-wrap">
+                                        <input type="text" id="shighw2" name="shighw2" maxlength=2 value="" onchange="DimensionHandler('shigh2')" onclick="DimensionHandler('shigh2')">
+                                        <select id="shighf2" name="shighf2" onchange="DimensionHandler('shigh2')">
+                                        </select>
+                                    </span>
+                                </div>
+                                
+                                <div>
+                                    <label for="swidew2">Width</label>
+                                    <span id="swide2" class="tooltip flex no-wrap">
+                                        <input type="text" id="swidew2" name="swidew2" maxlength=2 value="" onchange="DimensionHandler('swide2')" onclick="DimensionHandler('swide2')">
+                                        <select id="swidef2" name="swidef2" onchange="DimensionHandler('swide2')">
+                                        </select>
+                                    </span>
+                                </div>
+                                
+                                <div>
+                                    <label for="sdeepw2">Depth</label>
+                                    <span id="sdeep2" class="tooltip flex no-wrap">
+                                        <input type="text" id="sdeepw2" name="sdeepw2" maxlength=2 value="" onchange="DimensionHandler('sdeep2')" onclick="DimensionHandler('sdeep2')">
+                                        <select id="sdeepf2" name="sdeepf2" onchange="DimensionHandler('sdeep2')">
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="shighmsg2" class="alert error spacing-75"></div>
+                            <div id="swidemsg2" class="alert error spacing-75"></div>
+                            <div id="sdeepmsg2" class="alert error spacing-75"></div>
+                        </div>
+                        
+                    </li>
+                    
+                    <!-- Card Three -->
+                    <li class="card">
+                        
+                        <label for="24Title3">Artwork Title</label>
+                        <div class="titleChkNoValid">
+                            <input id="24Title3" type="text" name="24Title3" maxlength=44 value="" />
+                        </div>
+                        <div id="title3ValidChk" class="alert error">
+                            <span id="title3ValidMsg"></span>
+                            <input type="button" value="Edit" id="editTitle3Btn" onclick="validationEditHandler('title3')">
+                            <input type="button" value="Skip" id="title3Validskip" onclick="printHandler()">
+                        </div>
+
+                        <label for="25Media3">Medium / Sculpture Material</label>
+                        <div class="nameTipValid">
+                            <input id="25Media3" type="text" name="25Media3" maxlength=35 value="" />
+                        </div>
+                        
+                        <div id="media3ValidChk" class="alert error">
+                            <span id="media3ValidMsg"></span>
+                            <input type="button" value="Edit" id="editMedia3Btn" onclick="validationEditHandler('media3')">
+                            <input type="button" value="Skip" id="media3Validskip" onclick="printHandler()">
+                        </div>
+
+                        <div class="flex align-center">
+                            <div>
+                                <div class="priceTipValid">
+                                    <label for="28Price3">$ Price</label>
+                                    <input id="28Price3" type="text" name="28Price3" maxlength=6 value="" onchange="priceHandler('28Price3')">
+                                </div>
+                                <input type="text" name="193Dimensions3" style="display:none" value="">
+                            </div>
+                            
+                            <div class="flex-0">
+                                <label for="26Sculpture3" class="checkboxcontainer">
+                                    <input id="26Sculpture3" type="checkbox" name="26Sculpture3" value="Yes" onchange="dimensionDisplayHandler('26Sculpture3', '24Title3')">
+                                    <span>Is Sculpture</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div id="priceMsg3" class="alert error">
+                            <span id="priceMsg3Text"></span>
+                            <input type="button" value="OK" id="price3OkBtn" onclick="tipOK('price3')">
+                        </div>
+                        <div id="price3ValidChk" class="alert error">
+                            <span id="price3ValidMsg"></span>
+                            <input type="button" value="Edit" id="editPrice3Btn" onclick="validationEditHandler('price3')">
+                        </div>
+
+                        <div id="dimensionTable3">
+                            <div id="pictureDim3" class="flex spacing-75">
+                                <div>
+                                    <label for="fhighw3">Framed Height</label>
+                                    <span id="fhigh3" class="tooltip flex no-wrap">
+                                        <input type="text" id="fhighw3" name="fhighw3" maxlength=2 value="" onchange="DimensionHandler('fhigh3')" onclick="DimensionHandler('fhigh3')">
+                                        <select id="fhighf3" name="fhighf3" onchange="DimensionHandler('fhigh3')">
+                                        </select>
+                                    </span>
+                                </div>
+                                
+                                <div>
+                                    <label for="fwidew3">Framed Width</label>
+                                    <span id="fwide3" class="tooltip flex no-wrap">
+                                        <input type="text" id="fwidew3" name="fwidew3" maxlength=2 value="" onchange="DimensionHandler('fwide3')" onclick="DimensionHandler('fwide3')">
+                                        <select id="fwidef3" name="fwidef3" onchange="DimensionHandler('fwide3')">
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div id="fhighmsg3" class="alert error spacing-75"></div>
+                            <div id="fwidemsg3" class="alert error spacing-75"></div>
+                        
+                            <div id="sculptureDim3" class="flex no-wrap spacing-75" style="display:none;">
+                                <div>
+                                    <label for="shighw3">Height</label>
+                                    <span id="shigh3" class="tooltip flex no-wrap">
+                                        <input type="text" id="shighw3" name="shighw3" maxlength=2 value="" onchange="DimensionHandler('shigh3')" onclick="DimensionHandler('shigh3')">
+                                        <select id="shighf3" name="shighf3" onchange="DimensionHandler('shigh3')">
+                                        </select>
+                                    </span>
+                                </div>
+                                
+                                <div>
+                                    <label for="swidew3">Width </label>
+                                    <span id="swide3" class="tooltip flex no-wrap">
+                                        <input type="text" id="swidew3" name="swidew3" maxlength=2 value="" onchange="DimensionHandler('swide3')" onclick="DimensionHandler('swide3')">
+                                        <select id="swidef3" name="swidef3" onchange="DimensionHandler('swide3')">
+                                        </select>
+                                    </span>
+                                </div>
+                                
+                                <div>
+                                    <label for="sdeepw3">Depth </label>
+                                    <span id="sdeep3" class="tooltip flex no-wrap">
+                                        <input type="text" id="sdeepw3" name="sdeepw3" maxlength=2 value="" onchange="DimensionHandler('sdeep3')" onclick="DimensionHandler('sdeep3')">
+                                        <select id="sdeepf3" name="sdeepf3" onchange="DimensionHandler('sdeep3')">
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="shighmsg3" class="alert error spacing-75"></div>
+                            <div id="swidemsg3" class="alert error spacing-75"></div>
+                            <div id="sdeepmsg3" class="alert error spacing-75"></div>
+                        </div>
+                    </li>
+                </ol>
+                
+                <hr>
+
+                <label for="Notes">Additional Comments:</label>
+                <textarea id="Notes" name="46Notes" rows="5" cols="78" maxlength="1000" title="Maximum 1000 characters" wrap="hard" style="white-space: pre-wrap; resize: none;"></textarea>
+                
+            </section>
+            
+            <section>
+                <h3>Entrant Status</h3>
+
+                <label class="checkboxcontainer">
+                    <input type="checkbox" name="NewArtist" value="Yes" />
+                    <span>I am a <strong>new artist</strong> to this exhibition.</span>
+                </label>
+
+                <label for="CurrentMember" class="checkboxcontainer">
+                    <input id="CurrentMember" type="checkbox" value="Yes" name="CurrentMember" onchange="CurrentMemberSetup(event);">
+                    <span>
+                        I am a <strong>Current MPGS</strong> Member.<br>
+                    </span>
+                </label>
+
+                <label for="Emeritus" class="checkboxcontainer">
+                    <input id="Emeritus" type="checkbox" value="Yes" name="Emeritus" onchange="EmeritusSetup(event);">
+                    <span>
+                        I am an <strong>Emeritus</strong> Member.<br>
+                        <small>Honorary members only, applicable to a few members</small>
+                    </span>
+                </label>
+                
+                <label for="Board" class="checkboxcontainer">
+                    <input id="Board" type="checkbox" value="Yes" name="Board" onchange="BoardSetup(event);">
+                    <span>
+                        I am a <strong>Board</strong> Member.<br>
+                    </span>
+                </label>
+                
+                <label class="checkboxcontainer">
+                    <input id="DesignatedReceiver" type="checkbox" name="51IsReceiver" value="Yes" onchange="receiverStatusHandler(event);">
+                    <span>I am a <strong>MPSGS Designated Receiver</strong> for this exhibit.</span>
+                </label>
+                
+            </section>
+            
+            
+            
+            <!-- PAYMENT SECTION -->
+            <section>
+                <h3>Payment</h3>
+
+                <label for="DuesOnly" class="checkboxcontainer">
+                    <input id="DuesOnly" type="checkbox" value="Yes" name="DuesOnly" onchange="DuesOnlySetup();">
+                    <span>I am paying my <strong>Dues ONLY</strong>. I am <strong>NOT</strong> entering the exhibit.</span>
+                </label>
+
+                <label for="50ReceiveByPayPal" class="checkboxcontainer">
+                    <input id="50ReceiveByPayPal" type="checkbox" name="50ReceiveByPayPal" value="Yes">
+                    <span>I prefer to receive payments via <strong>PayPal</strong> for awards and/or sales.</span>
+                </label>
+                
+                
+                <label id="Intl_Container" for="43Intl" class="checkboxcontainer">
+                    <input type="checkbox" name="43Intl" id="43Intl" value=15 onchange="recalcFeeTotal()" />
+                    <span>I am an International Entrant ($15 fee to return artwork)</span>
+                </label>
+                
+                <label id="Dues_Container" for="42Dues" class="checkboxcontainer">
+                    <input type="checkbox" name="42Dues" id="42Dues" value=25 onchange="recalcFeeTotal()" />
+                    <span>Pay $25 Membership Dues</span>
+                </label>
+                <br />
+                <div id="Entry_Fee_Container" class="font-size-large spacing-1"> 
+                    <div id="entFeeLabel" class="spacing-75">Entry Fee</div>
+                    <div id="entFeeEntry">
+                        <div class="titleChkNoValid flex">
+                            <div class="flex flex-0 align-center">
+                                <input type="radio" id="entryFee1" name="39EntFee" value="25" onchange="recalcFeeTotal()">
+                                <label class="inline" for="entryFee1">
+                                    <div>$25</div>
+                                    <small>MPSGS Member</small>
+                                </label>
+                            </div>
+        
+                            <div class="flex flex-0 align-center">
+                                <input type="radio" id="entryFee2" name="39EntFee" onchange="recalcFeeTotal()" value="30">
+                                <label class="inline" for="entryFee2">
+                                    <div>$30</div> 
+                                    <small>Non-MPSGS Member Hand Delivered</small>
+                                </label>
+                            </div>
+        
+                            <div class="flex flex-0 align-center">
+                                <input type="radio" id="entryFee3" name="39EntFee" onchange="recalcFeeTotal()" value="45">
+                                <label class="inline" for="entryFee3">
+                                    <div>$45</div> 
+                                    <small>Non-MPSGS Member Mailed</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="entFeeValidChk" class="alert error">
+                            <span id="entFeeValidMsg"></span>
+                            <input type="button" value="Edit" style="font-size: 67%;" id="editEntFeeBtn" onclick="validationEditHandler('entFee')">
+                            <input type="button" value="Skip" style="font-size: 67%;" id="entFeeValidskip" onclick = "printHandler()">
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div id="Insurance_Container">
+                    <label for="insLabel" class="spacing-pad-left-1-2">Additional Insurance (Optional)</label>
+                    <p class="spacing-125 spacing-pad-left-1-2">
+                        <small>Amount you want MPSGS to pay the postal service for additional insurance on returned artworks, NOT the amount your returned artwork box is being insured for.  You must determine how much it will cost at the postal desk to purchase additional insurance.  MPSGS insures each returned artwork for a maximum of $200.</small>
+                    </p>
+                    <div id="insEntry" class="flex align-center spacing-75">
+                        <div class="flex-0 dollar-sign">$</div>
+                        <div class="feeTip">
+                            <input id="insLabel" class="spacing-0" type="number" name="41Ins" maxlength=8 onfocus="unformatFee('41Ins')" onchange="formatFee('41Ins')" onblur="recalcFeeTotal()">
+                            <span id="insMsg" class="feeTiptext">
+                                <b><i>Note:</b></i> The value you entered has been rounded down to the nearest whole dollar
+                                <input type="button" value="OK" style="font-size: 67%;" id="insOkBtn" onclick="tipOK('ins')">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div>
+                    <label for="43Donate" class="spacing-pad-left-1-2">Donation (Optional)</label>
+                    <div class="flex align-center spacing-3">
+                        <div class="flex-0 dollar-sign">$</div>
+                        <div class="feeTip">
+                            <input id="43Donate" class="spacing-0" type="number" name="43Donate" maxlength=8 onfocus="unformatFee('43Donate')" onchange="formatFee('43Donate')" onblur="recalcFeeTotal()">
+                            <span id="donateMsg" class="feeTiptext"><b><i>Note:</b></i> The value you entered has been rounded down to the nearest whole <input type="button" value="OK" id="donateOkBtn" onclick="tipOK('donate')"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Type -->
+                <div id="Payment_Type_Container" class="priceTipValid font-size-large spacing-3">
+                    <div class="spacing-75">Payment Method</div>
+                    <div class="flex">
+                        <!-- <div class="flex align-center flex-0">
+                            <input type="radio" id="paymentType1" name="40PayMethod" value="cash" onchange="payMethodHandler('payMeth')">
+                            <label class="inline" for="paymentType1" style="position: relative;top: 2px;padding-left: 4px;">Cash</label>
+                        </div> -->
+                        <div class="flex align-center flex-0">
+                            <input type="radio" id="paymentType2" name="40PayMethod" value="check" onchange="payMethodHandler('payMeth')">
+                            <label class="inline" for="paymentType2" style="position: relative;top: 2px;padding-left: 4px;">Check</label>
+                        </div>
+                        <div class="flex align-center flex-0">
+                            <input type="radio" id="paymentType3" name="40PayMethod" value="PayPal" onchange="payMethodHandler('payMeth')">
+                            <label class="inline" for="paymentType3" style="position: relative;top: 2px;padding-left: 4px;">Paypal</label>
+                        </div>
+                    </div>
+                    <div id="payMethValidChk" class="alert error">
+                        <span id="payMethValidMsg"></span>
+                        <input type="button" value="Edit" id="editPayMethBtn" onclick="validationEditHandler('payMeth')">
+                    </div>
+                </div>
+
+                <div id="Payment_Instructions">
+
+                    <!-- Cash -->
+                    <div id="Cash_Type" class="paymentMethods" hidden>
+                        <p class="font-size-large text-align-center all-caps">Cash Payment Instructions</p>
+                        <p>If paying by cash or check (made payable to MPSGS), mail to:<br /> 
+                            <b>MPSGS Treasurer</b><br /> 
+                            PO BOX 281<br /> 
+                            Simpsonville, MD 21150-0281
+                        </p>
+                    </div>
+        
+                    <!-- Check -->
+                    <div id="Check_Type" class="paymentMethods" hidden>
+                        <p class="font-size-large text-align-center all-caps">Check Payment Instructions</p>
+                        <p>If paying by check, make payment to MPSGS and mail to the following address. <br />
+                            You do <u>not</u> need to include a copy of the electronic entry form.<br /> 
+                            <b>MPSGS Treasurer</b><br /> 
+                            PO BOX 281<br /> 
+                            Simpsonville, MD 21150-0281
+                        </p>
+                        <div class="priceTipValid">
+                            <label for="45ChkNo">Enter your check number</label>
+                            <input id="45ChkNo" type="number" name="45ChkNo" maxlength=9 value="" onchange="payMethodHandler('chkNo')">
+                        </div>
+                        <div id="chkNoMsg" class="alert error">
+                            <span>Please enter your check number.</span>
+                            <input type="button" value="OK" id="chkNoOkBtn" onclick="tipOK('chkNo')">
+                        </div>
+                        <div id="chkNoValidChk" class="alert error">
+                            <span id="chkNoValidMsg"></span>
+                            <input type="button" value="Edit" id="editChkNoBtn" onclick="validationEditHandler('chkNo')">
+                        </div>
+                    </div>
+        
+                    <!-- Paypal -->
+                    <div id="Paypal_Type" class="paymentMethods" hidden>
+                        <p class="font-size-large text-align-center all-caps">Paypal Payment Instructions</p>
+                        <p>Select the Paypal account you would like to use:</p>
+                        <div class="flex align-center flex-0" style="margin: 1rem 0">
+                            <div class="flex align-center">
+                                <input type="radio" id="myPaypal" name="47paypalType" value="myPayPal" onchange="paypalInstructions()">
+                                <label class="inline" for="myPaypal" style="position: relative;top: 2px;padding-left: 4px;">My Paypal</label>
+                            </div>
+                            <div class="flex align-center">
+                                <input type="radio" id="anotherPaypal" name="47paypalType" value="anotherPaypal" onchange="paypalInstructions()">
+                                <label class="inline" for="anotherPaypal" style="position: relative;top: 2px;padding-left: 4px;">Another Paypal Account</label>
+                            </div>
+                            <div class="flex align-center">
+                                <input type="radio" id="payLater" name="47paypalType" value="payLater" onchange="paypalInstructions()">
+                                <label class="inline" for="payLater" style="position: relative;top: 2px;padding-left: 4px;">Pay Later via Paypal</label>
+                            </div>
+                        </div>
+                        
+                        <div id="OtherPaypal_Type" class="paypalMethods" hidden>
+                            <p>If paid via PayPal by someone other than the artist, type their name here: 
+                                <input type="text" name="48OtherPayPalName" onchange="payMethodHandler('altPayPal')">and please make a note in PayPal.
+                            </p>
+                            
+                            <div class="priceTipValid">
+                                <div id="altPPalMsg" class="alert error">
+                                    <span>Please type the actual PayPal payer's name.</span>
+                                    <input type="button" value="OK" id="altPPalOkBtn" onclick="tipOK('altPPal')">
+                                </div>
+                                <div id="altPPalValidChk" class="alert error">
+                                    <span id="altPPalValidMsg"></span>
+                                    <input type="button" value="Edit" id="editAltPPalBtn" onclick="validationEditHandler('altPPal')">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="Later_Type" class="paypalMethods" hidden>
+                            <p>You can pay later via Paypal if you prefer. Make a note of your total here and when you are ready to pay, login to Paypal and send your payment to mpsgsfees@gmail.com. 
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="flex no-wrap align-center total-container">
+                    <div class="flex-0 spacing-0">Total: <span class="dollar-sign">$</span></div>
+                    <div id="Total_Container" class="titleChkNoValid">
+                        <input id="44Total" class="spacing-0" value=0 type="number" name="44Total" maxlength=8 onfocus="recalcFeeTotal()" readonly>
+                    </div>
+                </div>
+
+                <hr>
+
+            </section>
+
+            <!-- INFORMATION SECTION -->
+            <section id="Information_Section" class="spacing-3">
+                <h3>Important Information</h3>
+                <p class="font-size-large"><strong>Payment information and printable tags</strong> will be generated <strong><u>AFTER</u></strong> you submit your form.</p>
+                <p><strong>BEFORE</strong> submitting the Entry Form, <strong>PRINT</strong> this document for future reference.</p>
+                <div id="Information_Buttons" class="button-wrapper flex">
+                    <input type="button" id="PrintBtn" class="basic flex-0" value="Print" onclick="printButtonHandler()" />
+                    <!-- <input type="button" id="downloadBtn" class="basic flex-0" value="Download" onclick="generatePDF()"> -->
+                    <span id="Loading_Container" style="display: none;" class="flex align-center flex-0">
+                        <svg style="margin: auto; background: rgb(255, 255, 255); display: block; shape-rendering: auto;" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><circle cx="50" cy="50" fill="none" stroke="#0e3197" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138"><animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform></circle></svg>
+                        <span style="padding-left: 0.5rem;">Generating PDF</span>
+                    </span>
+                </div>
+                
+                <hr>
+                <div style="padding: 0.25rem 1.5rem; background: rgb(235,235,235);border-radius: 1rem;">
+                    <p>By submitting this form, the artist <strong>agrees to all terms and conditions</strong> in the Prospectus.</p>
+                    <p>Wait until you see the Confirmation Page <strong>before</strong> leaving the site.</p>
+                    <p>Only Press "Submit" <strong>ONCE</strong>.</p>
+                </div>
+            </section>
+    
+            <!-- SUBMISSION SECTION -->
+            <section id="Submission_Button">
+                <div class="button-wrapper flex spacing-3">
+                    <input type="submit" id="SubmitBtn" value="Submit Your Form">
+                </div>
+            </section>
+        </form>
+        <script>
+            var pdf,HTML_Width,HTML_Height;
+        
+            function calculatePDF_height_width(){
+                HTML_Width = $(document).width();
+                HTML_Height = $(document).height();
+            }
+
+            function generatePDF() {
+                document.getElementById("downloadBtn").style.display = "none";
+                document.getElementById("Loading_Container").style.display = "flex";
+                pdf = "";
+                html2canvas(document.body, { 
+                    allowTaint: true,
+                    onclone: function (clonedDoc) {
+                        var totalValue = clonedDoc.getElementById('44Total').value;
+                        console.log(totalValue);
+                        clonedDoc.getElementById('44Total').style.display = "none";
+                        clonedDoc.getElementById('Total_Container').innerHTML = totalValue;
+                        // To DO: Remove elements and fix height issue
+                        clonedDoc.getElementById('Information_Section').style.visibility = "hidden";
+                        clonedDoc.getElementById('Submission_Button').style.visibility = "hidden";
+                    }
+                }).then(function(canvas) {
+
+                    calculatePDF_height_width();
+                    var imgData = canvas.toDataURL("image/png", 1.0);
+                    pdf = new jsPDF('p', 'pt', [HTML_Width, HTML_Height]);
+                    pdf.addImage(imgData, 'JPG', 0, 0, HTML_Width, HTML_Height, 'alias', 'NONE');
+
+                    setTimeout(function() {
+
+                        pdf.save("2022-MPSGS-Entry-Form.pdf");
+
+                    }, 0);
+
+                    document.getElementById("Loading_Container").style.display = "none";
+                    document.getElementById("downloadBtn").style.display = "flex";
+
+                });
+            };
+        </script>
+    </body>
+</html>
