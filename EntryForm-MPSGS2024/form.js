@@ -55,13 +55,13 @@ function showDues() {
 
 function clearEmeritusCheckbox() {
     document.getElementById("Emeritus").checked = false;
-    return true;
+    return false;
 }
 
 
 function clearBoardCheckbox() {
     document.getElementById("Board").checked = false;
-    return true;
+    return false;
 }
 
 function togglePaymentType() {
@@ -153,19 +153,19 @@ function letterCodeLists() {
 
                 selOpt = document.createElement("option");
 
-                selOpt.text = "1/4"; selOpt.value = .25; s.add(selOpt); i += 1;
+                selOpt.text = "1/4"; selOpt.value = ".25"; s.add(selOpt); i += 1;
 
                 selOpt = document.createElement("option");
 
-                selOpt.text = "1/2"; selOpt.value = .5; s.add(selOpt); i += 1;
+                selOpt.text = "1/2"; selOpt.value = ".5"; s.add(selOpt); i += 1;
 
                 selOpt = document.createElement("option");
 
-                selOpt.text = "3/4"; selOpt.value = .75; s.add(selOpt); i += 1;
+                selOpt.text = "3/4"; selOpt.value = ".75"; s.add(selOpt); i += 1;
 
                 selOpt = document.createElement("option");
 
-                selOpt.text = ""; selOpt.value = 0; s.add(selOpt); s.selectedIndex = i;
+                selOpt.text = ""; selOpt.value = "0"; s.add(selOpt); s.selectedIndex = i;
 
             }
 
@@ -373,7 +373,6 @@ function formatFee(inField) {
 }
 
 function recalcFeeTotal() {
-
     var duesOnly = document.getElementById("DuesOnly").checked;
     var emeritus = document.getElementById("Emeritus").checked;
     var memberDuesCheckbox = document.getElementById("42Dues").checked;
@@ -416,7 +415,8 @@ function recalcFeeTotal() {
             Number(document.forms["showEntryForm"]["43Donate"].value.replace(/\D/g,""));
             
         } else if(feesChecked) {
-            total = feeAmount + Number(document.forms["showEntryForm"]["41Ins"].value.replace(/\D/g,"")) + Number(document.forms["showEntryForm"]["43Donate"].value.replace(/\D/g,""));
+            total = feeAmount + 
+            Number(document.forms["showEntryForm"]["43Donate"].value.replace(/\D/g,""));
 
             if(canPayDues && memberDuesCheckbox) {
                 total = total + Number(document.forms["showEntryForm"]["42Dues"].value.replace(/\D/g,""));
@@ -424,16 +424,15 @@ function recalcFeeTotal() {
             
             
         } else {
-        
             total = Number(document.forms["showEntryForm"]["43Donate"].value.replace(/\D/g,""));
-        
         }
-        
     }
 
     if(intl) {
         total += Number(document.forms["showEntryForm"]["43Intl"].value.replace(/\D/g,""))
     }
+
+    total += Number(document.forms["showEntryForm"]["41Ins"].value.replace(/\D/g,""));
 
 
     z = total.toString();
@@ -1054,11 +1053,12 @@ function togglePaymentOptions() {
         disableDuesOnly();
         hideDues();
     } else if(boardChecked) {
+        console.log("boardChecked is true");
         // showEntryFee();
         hideEntryFee();
         showInsurance();
-        // disableDuesOnly();
-        enableDuesOnly()
+        disableDuesOnly();
+        // enableDuesOnly()
         hideDues();
     } else if(receiverChecked) {
         hideEntryFee();
@@ -1102,19 +1102,31 @@ function EmeritusSetup(e) {
     }
 }
 
+function NewArtistSetup(e) {
+    const newArtistChecked = document.getElementById("New_Artist").checked;
+    if(newArtistChecked) {
+        document.getElementById("42Dues").checked = false;
+        hideDues();
+        recalcFeeTotal();
+    } else {
+        showDues();
+        recalcFeeTotal();
+    }
+}
+
 function BoardSetup(e) {
     const emeritusChecked = clearEmeritusCheckbox();
-
-    if (emeritusChecked) {
-        togglePaymentOptions();
     
+    if (emeritusChecked) {
+        console.log("emeritus checked true");
+        togglePaymentOptions();
+        
         let currentRadios = document.getElementsByName("39EntFee");
         for(var i=0; i < currentRadios.length; i++) {
             currentRadios[i].checked = false;
         }
         recalcFeeTotal();
-    }
-    
+    } 
 }
 
 function receiverStatusHandler(e) {
