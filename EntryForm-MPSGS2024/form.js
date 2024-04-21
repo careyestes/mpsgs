@@ -49,8 +49,17 @@ function hideDues() {
     document.getElementById("Dues_Container").style.display = 'none';
 }
 
+
 function showDues() {
     document.getElementById("Dues_Container").style.display = 'flex';
+}
+
+function hideIntl() {
+    document.getElementById("Intl_Container").style.display = 'none';
+}
+
+function showIntl() {
+    document.getElementById("Intl_Container").style.display = 'flex';
 }
 
 function clearEmeritusCheckbox() {
@@ -376,6 +385,7 @@ function recalcFeeTotal() {
     var duesOnly = document.getElementById("DuesOnly").checked;
     var emeritus = document.getElementById("Emeritus").checked;
     var memberDuesCheckbox = document.getElementById("42Dues").checked;
+    var CurrentMember = document.getElementById("CurrentMember").checked;
     var intl = document.getElementById("43Intl").checked;
     var inField = "44Total"
     var total = 0;
@@ -392,6 +402,9 @@ function recalcFeeTotal() {
             document.getElementById("42Dues").disabled = true;
             canPayDues = false;
         } else {
+            if(CurrentMember) {
+                document.getElementById("42Dues").checked = true;
+            }
             document.getElementById("42Dues").disabled = false;
             canPayDues = true;
         }
@@ -1047,13 +1060,13 @@ function togglePaymentOptions() {
         hideInsurance();
         disableDuesOnly();
         hideDues();
+        hideIntl();
     } else if(boardChecked && receiverChecked) {
         hideEntryFee();
         hideInsurance();
         disableDuesOnly();
         hideDues();
     } else if(boardChecked) {
-        console.log("boardChecked is true");
         // showEntryFee();
         hideEntryFee();
         showInsurance();
@@ -1070,6 +1083,7 @@ function togglePaymentOptions() {
         showInsurance();
         enableDuesOnly();
         showDues();
+        showIntl();
     }
 }
 
@@ -1090,16 +1104,14 @@ function CurrentMemberSetup(e) {
 function EmeritusSetup(e) {
     const boardChecked = clearBoardCheckbox();
 
+    togglePaymentOptions();
     
-    if(boardChecked) {
-        togglePaymentOptions();
-        
-        let currentRadios = document.getElementsByName("39EntFee");
-        for(var i=0; i < currentRadios.length; i++) {
-            currentRadios[i].checked = false;
-        }
-        recalcFeeTotal();
+    let currentRadios = document.getElementsByName("39EntFee");
+    for(var i=0; i < currentRadios.length; i++) {
+        currentRadios[i].checked = false;
     }
+    recalcFeeTotal();
+    
 }
 
 function NewArtistSetup(e) {
@@ -1116,17 +1128,26 @@ function NewArtistSetup(e) {
 
 function BoardSetup(e) {
     const emeritusChecked = clearEmeritusCheckbox();
+    duesCheckbox = document.forms["showEntryForm"]["42Dues"].checked;
+    
+    if(duesCheckbox) {
+        document.forms["showEntryForm"]["42Dues"].checked = false;
+        document.forms["showEntryForm"]["42Dues"].removeAttribute('readonly');
+    } else {
+        document.forms["showEntryForm"]["42Dues"].checked = true;
+        document.forms["showEntryForm"]["42Dues"].setAttribute('readonly', true);
+    }
     
     if (emeritusChecked) {
-        console.log("emeritus checked true");
         togglePaymentOptions();
         
         let currentRadios = document.getElementsByName("39EntFee");
         for(var i=0; i < currentRadios.length; i++) {
             currentRadios[i].checked = false;
         }
-        recalcFeeTotal();
     } 
+
+    recalcFeeTotal();
 }
 
 function receiverStatusHandler(e) {
@@ -1148,6 +1169,7 @@ function DuesOnlySetup() {
     toggleEntryDetails();
     toggleEntryFee();
     toggleInsurance();
+    
     let currentRadios = document.getElementsByName("39EntFee");
     for(var i=0; i < currentRadios.length; i++) {
         currentRadios[i].checked = false;
@@ -2106,8 +2128,12 @@ function downloadPdf() {
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('42Dues').addEventListener('click', function(e) {
         const memberCheckbox = document.forms["showEntryForm"]["CurrentMember"].checked;
+        const boardCheckbox = document.forms["showEntryForm"]["Board"].checked;
         
         if (memberCheckbox) {
+            e.preventDefault(); // Prevent the click event from changing the checkbox state
+        }  
+        if (boardCheckbox) {
             e.preventDefault(); // Prevent the click event from changing the checkbox state
         }  
     });
