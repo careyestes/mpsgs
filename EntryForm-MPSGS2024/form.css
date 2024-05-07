@@ -81,6 +81,17 @@ h2.callout {
     text-transform: uppercase;
 }
 
+.message {
+    display: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    background: #ffa50057;
+    padding: 1.2rem 0;
+    border-radius: 10rem;
+    margin: 1rem 0 0;
+}
+
 .spacing-75 {
     margin: 0 0 0.75rem;
 }
@@ -159,6 +170,7 @@ textarea {
     max-width: 768px;
     padding: 0.125rem 0.5rem;
     border-radius: 0.3rem;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
     font-size: 1.2rem;
     line-height: 2.2rem;
 }

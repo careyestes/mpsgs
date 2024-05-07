@@ -183,37 +183,37 @@ function letterCodeLists() {
 }
 
 // Set Tooltips for Fee entries
-function feeTitles() {
+// function feeTitles() {
 
-    document.forms["showEntryForm"]["39EntFee"].title =
+//     document.forms["showEntryForm"]["39EntFee"].title =
 
-        "Fee to enter this show:\r\n" +
+//         "Fee to enter this show:\r\n" +
 
-        "Member within U.S. - \t\t$25\r\n" +
+//         "Member within U.S. - \t\t$25\r\n" +
 
-        "Member outside U.S. - \t$40\r\n" +
+//         "Member outside U.S. - \t$40\r\n" +
 
-        "Non-Member hand delivered - \t$30\r\n" +
+//         "Non-Member hand delivered - \t$30\r\n" +
 
-        "Non-Member mailed - \t$45";
+//         "Non-Member mailed - \t$45";
 
-    document.forms["showEntryForm"]["41Ins"].title =
+//     // document.forms["showEntryForm"]["41Ins"].title =
 
-        "$1 for every $100 of coverage plus the initial $200 of coverage ($3 = $500 coverage)";
+//     //     "$1 for every $100 of coverage plus the initial $200 of coverage ($3 = $500 coverage)";
 
-    document.forms["showEntryForm"]["42Dues"].title =
+//     document.forms["showEntryForm"]["42Dues"].title =
 
-        "Members may include their annual dues of $25 for 1 year.";
+//         "Members may include their annual dues of $25 for 1 year.";
 
-    document.forms["showEntryForm"]["43Donate"].title = "Thank you for your donation!";
+//     document.forms["showEntryForm"]["43Donate"].title = "Thank you for your donation!";
 
-    document.forms["showEntryForm"]["44Total"].title =
+//     document.forms["showEntryForm"]["44Total"].title =
 
-        "Click inside this box if the total is missing.";
+//         "Click inside this box if the total is missing.";
 
-    document.forms["showEntryForm"]["45ChkNo"].title = "Enter your Check Number.";
+//     document.forms["showEntryForm"]["45ChkNo"].title = "Enter your Check Number.";
 
-}
+// }
 
 function priceHandler(inField) {
 
@@ -386,7 +386,7 @@ function recalcFeeTotal() {
     var emeritus = document.getElementById("Emeritus").checked;
     var memberDuesCheckbox = document.getElementById("42Dues").checked;
     var CurrentMember = document.getElementById("CurrentMember").checked;
-    var intl = document.getElementById("43Intl").checked;
+    var isIntl = document.getElementById("43Intl").value;
     var inField = "44Total"
     var total = 0;
     var z = "";
@@ -441,8 +441,8 @@ function recalcFeeTotal() {
         }
     }
 
-    if(intl) {
-        total += Number(document.forms["showEntryForm"]["43Intl"].value.replace(/\D/g,""))
+    if(isIntl === "true") {
+        total += 15;
     }
 
     total += Number(document.forms["showEntryForm"]["41Ins"].value.replace(/\D/g,""));
@@ -1103,6 +1103,7 @@ function CurrentMemberSetup(e) {
 
 function EmeritusSetup(e) {
     const boardChecked = clearBoardCheckbox();
+    document.getElementById("42Dues").checked = false;
 
     togglePaymentOptions();
     
@@ -1128,7 +1129,14 @@ function NewArtistSetup(e) {
 
 function BoardSetup(e) {
     const emeritusChecked = clearEmeritusCheckbox();
+    const isBoard = document.forms["showEntryForm"]["Board"].checked;
     duesCheckbox = document.forms["showEntryForm"]["42Dues"].checked;
+
+    if(isBoard) {
+        document.forms["showEntryForm"]["CurrentMember"].checked = true;
+    } else {
+        document.forms["showEntryForm"]["CurrentMember"].checked = false;
+    }
     
     if(duesCheckbox) {
         document.forms["showEntryForm"]["42Dues"].checked = false;
@@ -1178,6 +1186,25 @@ function DuesOnlySetup() {
     document.getElementById("42Dues").toggleAttribute("checked");
     recalcFeeTotal();
     
+}
+
+function checkCountry(event) {
+    const validCountries = ['United States', 'USA', 'US', 'America', 'U.S.'];
+    const inputValue = event.target.value;
+    const isValid = validCountries.includes(inputValue);
+    const messageElement = document.getElementById('message');
+
+    
+    if (!isValid) {
+        document.getElementById("43Intl").value='true';
+        messageElement.textContent = 'International entrants will be charged a $15 fee to return artwork.';
+        messageElement.style.display = "block";
+    } else {
+        document.getElementById("43Intl").value='false';
+        messageElement.style.display = "none";
+        messageElement.textContent = '';
+    }
+    recalcFeeTotal();
 }
 
 function showTipMsg(tip) {

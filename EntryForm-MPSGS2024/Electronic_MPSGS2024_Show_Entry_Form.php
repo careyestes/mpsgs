@@ -37,34 +37,34 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         //    loop through every field in the form
-        foreach($_POST as $x => $x_value) {
+        // foreach($_POST as $x => $x_value) {
 
             //        filter the form data to prevent cross-site scripting exploits
-            $x_value = trim($x_value, "\x00..\x1F");         //remove all leading and trailing ASCII control char's
-            $x_value = trim($x_value);                       //remove all leading and trailing spaces and print directives (\t,\n,\r,...)
-            $x_value = stripslashes($x_value);
-            $x_value = htmlspecialchars($x_value);           //replace &, ", >, and < (used for cross-site scripting) with codes
-            $x_value = str_replace('\n.', '\n..', $x_value); //work around for a known problem with some browsers
-            //        filter field names to prevent possible problems later
-            $x = trim($x, "\x00..\x1F");                     //remove all leading and trailing ASCII control char's
-            $x = trim($x);                                   //remove all leading and trailing spaces and print directives (\t,\n,\r,...)
-            $x = stripslashes($x);
-            $x = htmlspecialchars($x);                       //replace &, ", >, and < (used for cross-site scripting) with codes
-            //        stop processing if malicious SQL code is found
+            // $x_value = trim($x_value, "\x00..\x1F");         //remove all leading and trailing ASCII control char's
+            // $x_value = trim($x_value);                       //remove all leading and trailing spaces and print directives (\t,\n,\r,...)
+            // $x_value = stripslashes($x_value);
+            // $x_value = htmlspecialchars($x_value);           //replace &, ", >, and < (used for cross-site scripting) with codes
+            // $x_value = str_replace('\n.', '\n..', $x_value); //work around for a known problem with some browsers
+            // //        filter field names to prevent possible problems later
+            // $x = trim($x, "\x00..\x1F");                     //remove all leading and trailing ASCII control char's
+            // $x = trim($x);                                   //remove all leading and trailing spaces and print directives (\t,\n,\r,...)
+            // $x = stripslashes($x);
+            // $x = htmlspecialchars($x);                       //replace &, ", >, and < (used for cross-site scripting) with codes
+            // //        stop processing if malicious SQL code is found
             
-            if ((stripos($x_value, "drop table ") !== false) ||
+            // if ((stripos($x_value, "drop table ") !== false) ||
 
-                (stripos($x_value, "alter table ") !== false)) {
+            //     (stripos($x_value, "alter table ") !== false)) {
 
-                    $formdata = "";                          //empty the body of the e-mail message
+            //         $formdata = "";                          //empty the body of the e-mail message
 
-                    $SQLInj = true;                          //flag an attack
+            //         $SQLInj = true;                          //flag an attack
 
-                    break;                                   //abandon the 'foreach loop
+            //         break;                                   //abandon the 'foreach loop
 
-            }
+            // }
             
-            str_replace(";", "", $x_value); //semi-colons are used in malicious SQL code
+            // str_replace(";", "", $x_value); //semi-colons are used in malicious SQL code
             
             // accumulate data for the body of the e-mail message
             
@@ -92,159 +92,144 @@
 
             // }
 
-        }
+        // }
 
-        $formdata .= "<h2>Contact Information</h2>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>" . $FirstName . " " . $_POST["99MidIni"] . " " . $LastName . " " . $_POST["100NameSuf"] . "</p>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>" . $_POST["04Addr1"] . "</p>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>" . $_POST["05Addr2"] . "</p>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>" . $_POST["06City"] . ", " . $_POST["07State"] . " " . $_POST["09PostCode"] . " " . $_POST["08Country"] . "</p>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>" . $_POST["10Phone"] . "</p>";
-        $formdata .= "<p>" . $_POST["11Email"] . "</p>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Instagram: " . $_POST["12Instagram"] . "</p>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Facebook: " . $_POST["13Facebook"] . "</p>";
+        $formdata .= "<b>Contact Information</b><br />";
+        $formdata .= $FirstName . " " . $_POST["99MidIni"] . " " . $LastName . " " . $_POST["100NameSuf"] . "<br />";
+        $formdata .= $_POST["04Addr1"] . "<br />";
+        $formdata .= isset($_POST["05Addr2"]) && $_POST["05Addr2"] ? $_POST["05Addr2"] . "<br />" : "";
+        $formdata .= $_POST["06City"] . ", " . $_POST["07State"] . " " . $_POST["09PostCode"] . " " . $_POST["08Country"] . "<br />";
+        $formdata .= $_POST["10Phone"] . "<br />";
+        $formdata .= $_POST["11Email"] . "<br />";
+        $formdata .= "Instagram: " . $_POST["12Instagram"] . "<br />";
+        $formdata .= "Facebook: " . $_POST["13Facebook"] . "<br />";
         
-        $formdata .= "<br />";
-        $formdata .= "<hr />";
-        $formdata .= "<br />";
-        
-        $formdata .= "<h2>Entry Details" . "</h2>";
-        $formdata .= "<p>Receiver: " . $_POST["12Receiver"] . "</p>";
+        $formdata .= "Entry Details<br />";
+        $formdata .= "Receiver: " . $_POST["12Receiver"] . "<br />";
     
         // ---------- Artwork 1 ---------- //
-        $formdata .= "<h3>Artwork 1</h3>";
-        $formdata .= "<h4>Title: " . $_POST["14Title1"] . "</h4>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Material: " . $_POST["15Media1"] . "</p>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Price: " . $_POST["18Price1"] . "</p>";
+        $formdata .= "<b>Artwork 1</b><br />";
+        $formdata .= "Title: " . $_POST["14Title1"] . "<br />";
+        $formdata .= "Material: " . $_POST["15Media1"] . "<br />";
+        $formdata .= "Price: " . $_POST["18Price1"] . "<br />";
         if(isset($_POST["16Sculpture1"]) && $_POST["16Sculpture1"] == "Yes") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Is Sculpture? " . $_POST["16Sculpture1"] . "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Height: " . $_POST["shighw1"] . ($_POST["shighf1"] ?? "") . "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Width: " . $_POST["swidew1"] .  ($_POST["swidef1"] ?? "") . "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Depth: " . $_POST["sdeepw1"] .  ($_POST["sdeepf1"] ?? "") . "</p>";
+            $formdata .= "Is Sculpture? " . $_POST["16Sculpture1"] . "<br />";
+            $formdata .= "Height: " . $_POST["shighw1"] . ($_POST["shighf1"] ?? "") . "<br />";
+            $formdata .= "Width: " . $_POST["swidew1"] .  ($_POST["swidef1"] ?? "") . "<br />";
+            $formdata .= "Depth: " . $_POST["sdeepw1"] .  ($_POST["sdeepf1"] ?? "") . "<br />";
         } else {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Framed Height: " . $_POST["fhighw1"];
+            $formdata .= "Framed Height: " . $_POST["fhighw1"];
             if(isset($_POST["fhighf3"])) { 
                 $formdata .= $_POST["fhighf1"]; 
             } 
-            $formdata .= "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Framed Width: " . $_POST["fwidew1"];
+            $formdata .= "<br />";
+            $formdata .= "Framed Width: " . $_POST["fwidew1"];
             if(isset($_POST["fwidef1"])) { 
                 $formdata .= $_POST["fwidef1"]; 
             }
-            $formdata .= "</p>";
+            $formdata .= "<br />";
         }
-        $formdata .= "<br />";
         
         // ---------- Artwork 2 ---------- //
-        $formdata .= "<h3>Artwork 2" . "</h3>";
-        $formdata .= "<h4>Title: " . $_POST["19Title2"] . "</h4>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Material: " . $_POST["20Media2"] . "</p>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Price: " . $_POST["23Price2"] . "</p>";
+        $formdata .= "<b>Artwork 2</b><br />";
+        $formdata .= "Title: " . $_POST["19Title2"] . "<br />";
+        $formdata .= "Material: " . $_POST["20Media2"] . "<br />";
+        $formdata .= "Price: " . $_POST["23Price2"] . "<br />";
         if(isset($_POST["21Sculpture2"]) && $_POST["21Sculpture2"] == "Yes") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Is Sculpture? " . $_POST["21Sculpture2"] . "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Height: " . $_POST["shighw2"] . ($_POST["shighf2"] ?? "") . "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Width: " . $_POST["swidew2"] .  ($_POST["swidef2"] ?? "") . "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Depth: " . $_POST["sdeepw2"] .  ($_POST["sdeepf2"] ?? "") . "</p>";
+            $formdata .= "Is Sculpture? " . $_POST["21Sculpture2"] . "<br />";
+            $formdata .= "Height: " . $_POST["shighw2"] . ($_POST["shighf2"] ?? "") . "<br />";
+            $formdata .= "Width: " . $_POST["swidew2"] .  ($_POST["swidef2"] ?? "") . "<br />";
+            $formdata .= "Depth: " . $_POST["sdeepw2"] .  ($_POST["sdeepf2"] ?? "") . "<br />";
         } else {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Framed Height: " . $_POST["fhighw2"];
+            $formdata .= "Framed Height: " . $_POST["fhighw2"];
             if(isset($_POST["fhighf2"])) { 
                 $formdata .= $_POST["fhighf2"];
             }
-            $formdata .= "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Framed Width: " . $_POST["fwidew2"];
+            $formdata .= "<br />";
+            $formdata .= "Framed Width: " . $_POST["fwidew2"];
             if(isset($_POST["fwidef2"])) { 
                 $formdata .= $_POST["fwidef2"];
             }
-            $formdata .= "</p>";
+            $formdata .= "<br />";
         }
-        $formdata .= "<br />";
         
         // ---------- Artwork 3 ---------- //
-        $formdata .= "<h3>Artwork 3" . "</h3>";
-        $formdata .= "<h4>Title: " . $_POST["24Title3"] . "</h4>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Material: " . $_POST["25Media3"] . "</p>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Price: " . $_POST["28Price3"] . "</p>";
+        $formdata .= "<b>Artwork 3</b><br />";
+        $formdata .= "Title: " . $_POST["24Title3"] . "<br />";
+        $formdata .= "Material: " . $_POST["25Media3"] . "<br />";
+        $formdata .= "Price: " . $_POST["28Price3"] . "<br />";
         if(isset($_POST["26Sculpture3"]) && $_POST["26Sculpture3"] == "Yes") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Is Sculpture? " . $_POST["26Sculpture3"] . "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Height: " . $_POST["shighw3"] . ($_POST["shighf3"] ?? "") . "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Width: " . $_POST["swidew3"] .  ($_POST["swidef3"] ?? "") . "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Depth: " . $_POST["sdeepw3"] .  ($_POST["sdeepf3"] ?? "") . "</p>";
+            $formdata .= "Is Sculpture? " . $_POST["26Sculpture3"] . "<br />";
+            $formdata .= "Height: " . $_POST["shighw3"] . ($_POST["shighf3"] ?? "") . "<br />";
+            $formdata .= "Width: " . $_POST["swidew3"] .  ($_POST["swidef3"] ?? "") . "<br />";
+            $formdata .= "Depth: " . $_POST["sdeepw3"] .  ($_POST["sdeepf3"] ?? "") . "<br />";
         } else {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Framed Height: " . $_POST["fhighw3"];
+            $formdata .= "Framed Height: " . $_POST["fhighw3"];
             if(isset($_POST["fhighf3"])) { 
                 $formdata .= $_POST["fhighf3"];
             }
-            $formdata .= "</p>";
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Framed Width: " . $_POST["fwidew3"];
+            $formdata .= "<br />";
+            $formdata .= "Framed Width: " . $_POST["fwidew3"];
             if(isset($_POST["fwidef3"])) { 
                 $formdata .= $_POST["fwidef3"];
             }
-            $formdata .= "</p>";
+            $formdata .= "<br />";
         }
-        $formdata .= "<br />";
-        $formdata .= "<h3>Additional Comments:</h3>";
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>" . $_POST["46Notes"] . "</p>";
-        
-        $formdata .= "<br />";
-        $formdata .= "<hr />";
-        $formdata .= "<br />";
+        $formdata .= "<b>Additional Comments:</b><br />";
+        $formdata .= $_POST["46Notes"] . "<br />";
 
         // ---------- Entrant Status ---------- //
-        $formdata .= "<h2>Entrant Status</h2>";
+        $formdata .= "<b>Entrant Status</b><br />";
         if(isset($_POST["NewArtist"]) && $_POST["NewArtist"] == "Yes") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>New Artist " . "</p>";
+            $formdata .= "New Artist " . "<br />";
         }
         if(isset($_POST["CurrentMember"]) && $_POST["CurrentMember"] == "Yes") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Current MPGS Member" . "</p>";
+            $formdata .= "Current MPGS Member" . "<br />";
         }
         if(isset($_POST["Emeritus"]) && $_POST["Emeritus"] == "Yes") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Emeritus Member" . "</p>";
+            $formdata .= "Emeritus Member" . "<br />";
         }
         if(isset($_POST["Board"]) && $_POST["Board"] == "Yes") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Board Member" . "</p>";
+            $formdata .= "Board Member" . "<br />";
         }
         if(isset($_POST["51IsReceiver"]) && $_POST["51IsReceiver"] == "Yes") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Designated Receiver" . "</p>";
+            $formdata .= "Designated Receiver" . "<br />";
         }
-        
-        $formdata .= "<br />";
-        $formdata .= "<hr />";
-        $formdata .= "<br />";
 
         // ---------- Payment ---------- //
-        $formdata .= "<h2>Payment</h2>";
+        $formdata .= "<b>Payment</b><br />";
         if(isset($_POST["DuesOnly"]) && $_POST["DuesOnly"] == "Yes") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>I am paying my Dues ONLY. I am NOT entering the exhibit.</p>";
+            $formdata .= "I am paying my Dues ONLY. I am NOT entering the exhibit.<br />";
         }
         if(isset($_POST["50ReceiveByPayPal"]) && $_POST["50ReceiveByPayPal"] == "Yes") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>I prefer to receive payments via PayPal for awards and/or sales.</p>";
+            $formdata .= "I prefer to receive payments via PayPal for awards and/or sales.<br />";
         }
         if(isset($_POST["43Intl"]) && $_POST["43Intl"]) {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>I am an International Entrant</p>";
+            $formdata .= "I am an International Entrant<br />";
         }
         if(isset($_POST["42Dues"]) && $_POST["42Dues"]) {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>I am paying my dues.</p>";
+            $formdata .= "I am paying my dues.<br />";
         }
         if(isset($_POST["39EntFee"]) && $_POST["39EntFee"]) {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Entry Fee: " . $_POST["39EntFee"] . "</p>";
+            $formdata .= "Entry Fee: $" . $_POST["39EntFee"] . "<br />";
         }
         if(isset($_POST["41Ins"]) && $_POST["41Ins"]) {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Additonal Insurance: " . $_POST["41Ins"] . "</p>";
+            $formdata .= "Additonal Insurance: $" . $_POST["41Ins"] . "<br />";
         }
         if(isset($_POST["43Donate"]) && $_POST["43Donate"]) {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Donation: " . $_POST["43Donate"] . "</p>";
+            $formdata .= "Donation: $" . $_POST["43Donate"] . "<br />";
         }
         
-        $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Payment Method: " . $_POST["40PayMethod"] . "</p>";
+        $formdata .= "Payment Method: " . $_POST["40PayMethod"] . "<br />";
         
         if(isset($_POST["43Donate"]) && $_POST["43Donate"] == "check") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Check Number: " . $_POST["45ChkNo"] . "</p>";
+            $formdata .= "Check Number: " . $_POST["45ChkNo"] . "<br />";
         }
         if(isset($_POST["43Donate"]) && $_POST["43Donate"] == "PayPal") {
-            $formdata .= "<p style='margin-top: 0;margin-bottom: 3px;'>Paypal Information: " . $_POST["47paypalType"] . "</p>";
+            $formdata .= "Paypal Information: " . $_POST["47paypalType"] . "<br />";
         }
         
-        $formdata .= "<h1>Total: " . $_POST["44Total"] . "</h1>";
+        $formdata .= "<b>Total: $" . $_POST["44Total"] . "</b><br />";
 
         // Boilerplate html top
         $htmlEmail = "
