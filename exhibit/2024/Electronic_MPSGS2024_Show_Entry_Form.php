@@ -1,7 +1,7 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
     
     // define variables and set to initial values
     $currentYear = "2024";
@@ -222,9 +222,6 @@
         if(isset($_POST["40PayMethod"]) && $_POST["40PayMethod"] == "PayPal") {
             $formdata .= "PayPal Information: " . $_POST["47paypalType"] . "<br />";
         }
-
-        var_dump($_POST["39EntFee"]);
-        die;
 
         if(isset($_POST["42Dues"]) && $_POST["42Dues"]) {
             $formdata .= "$" . $_POST["42Dues"] . " : Dues<br />";
