@@ -62,6 +62,21 @@ function showIntl() {
     document.getElementById("Intl_Container").style.display = 'flex';
 }
 
+function toggleIntl() {
+    let intlValue = document.getElementById("43Intl").value;
+    let lineItem = document.getElementById('International_Line');
+
+    if(intlValue === 'false') {
+        document.getElementById("43Intl").value='false';
+        lineItem.style.display = "none";
+        lineItem.textContent = '';
+    } else {
+        document.getElementById("43Intl").value='true';
+        lineItem.innerHTML = "<span>International Entry:</span> <span class='count'>$15</span>";
+        lineItem.style.display = "flex";
+    }
+}
+
 function clearEmeritusCheckbox() {
     document.getElementById("Emeritus").checked = false;
     return false;
@@ -386,6 +401,11 @@ function recalcFeeTotal() {
     var emeritus = document.getElementById("Emeritus").checked;
     var memberDuesCheckbox = document.getElementById("42Dues").checked;
     var CurrentMember = document.getElementById("CurrentMember").checked;
+    var Board = document.getElementById("Board").checked;
+    var feeLineItem = document.getElementById("Entry_Fee_Line");
+    var duesLineItem = document.getElementById("Dues_Line");
+    var InsLine = document.getElementById("Insurance_Line");
+    var Donation_Line = document.getElementById("Donation_Line");
     var isIntl = document.getElementById("43Intl").value;
     var inField = "44Total"
     var total = 0;
@@ -401,19 +421,43 @@ function recalcFeeTotal() {
             document.getElementById("42Dues").checked = false;
             document.getElementById("42Dues").disabled = true;
             canPayDues = false;
+            duesLineItem.innerHTML = "";
+            duesLineItem.style.display = "none";
         } else {
-            if(CurrentMember) {
+            if(CurrentMember || Board) {
                 document.getElementById("42Dues").checked = true;
             }
             document.getElementById("42Dues").disabled = false;
             canPayDues = true;
+            if(memberDuesCheckbox) {
+                duesLineItem.innerHTML = "<span>Membership Dues:</span> <span class='count'>$" + Number(document.forms["showEntryForm"]["42Dues"].value.replace(/\D/g,"")) + "</span>";
+                duesLineItem.style.display = "flex";
+            }
         }
         
         if (feeElems[i].checked) {
             feesChecked = true;
             feeAmount = Number(document.forms["showEntryForm"]["39EntFee"].value.replace(/\D/g,""));
+            feeLineItem.innerHTML = "<span>Entry Fee:</span> <span class='count'>$" + Number(document.forms["showEntryForm"]["39EntFee"].value.replace(/\D/g,"")) + "</span>";
+            feeLineItem.style.display = "flex"
             break;
+        } else {
+            feeLineItem.innerHTML = "";
+            feeLineItem.style.display = "none"
         }
+    }
+
+    if(!memberDuesCheckbox) {
+        duesLineItem.innerHTML = "";
+        duesLineItem.style.display = "none";
+    }
+
+    if(document.forms["showEntryForm"]["43Donate"].value > 0) {
+        Donation_Line.innerHTML = "<span>Donation:</span> <span class='count'>$" + Number(document.forms["showEntryForm"]["43Donate"].value.replace(/\D/g,"")) + "</span>";
+        Donation_Line.style.display = "flex";
+    } else {
+        Donation_Line.innerHTML = "";
+        Donation_Line.style.display = "none";
     }
 
     if(emeritus) {
@@ -422,22 +466,20 @@ function recalcFeeTotal() {
 
     } else {
 
-        if (memberDuesCheckbox && !feesChecked) {
+        if ((memberDuesCheckbox && !feesChecked) || Board) {
             total = 
             Number(document.forms["showEntryForm"]["42Dues"].value.replace(/\D/g,"")) + 
             Number(document.forms["showEntryForm"]["43Donate"].value.replace(/\D/g,""));
-            
         } else if(feesChecked) {
             total = feeAmount + 
             Number(document.forms["showEntryForm"]["43Donate"].value.replace(/\D/g,""));
-
+            
             if(canPayDues && memberDuesCheckbox) {
                 total = total + Number(document.forms["showEntryForm"]["42Dues"].value.replace(/\D/g,""));
             }
             
-            
         } else {
-            total = Number(document.forms["showEntryForm"]["43Donate"].value.replace(/\D/g,""));
+            total = Number(document.forms["showEntryForm"]["43Donate"].value.replace(/\D/g,"")) + Number(document.forms["showEntryForm"]["42Dues"].value.replace(/\D/g,""));
         }
     }
 
@@ -445,8 +487,15 @@ function recalcFeeTotal() {
         total += 15;
     }
 
-    total += Number(document.forms["showEntryForm"]["41Ins"].value.replace(/\D/g,""));
+    if(document.forms["showEntryForm"]["41Ins"].value > 0) {
+        InsLine.innerHTML = "<span>Additional Insurance:</span> <span class='count'>$" + Number(document.forms["showEntryForm"]["41Ins"].value.replace(/\D/g,"")) + "</span>";
+        InsLine.style.display = "flex";
+    } else {
+        InsLine.innerHTML = "";
+        InsLine.style.display = "none";
+    }
 
+    total += Number(document.forms["showEntryForm"]["41Ins"].value.replace(/\D/g,""));
 
     z = total.toString();
     z = formatNum(inField, z);
@@ -577,7 +626,7 @@ function DimensionHandler(inField) {
 
                 if ((inField.slice(0, 1) == "f") && ((x * d) > 60)) {
 
-                    errMsg = "The area of this framed work is larger than the 56 sq. in. maximum allowed in the prospectus.";
+                    errMsg = "The outside dimension of this framed work is larger than the 56 sq. in. maximum allowed in the prospectus.";
                     errno = 4;
 
                 }
@@ -1060,7 +1109,7 @@ function togglePaymentOptions() {
         hideInsurance();
         disableDuesOnly();
         hideDues();
-        hideIntl();
+        // hideIntl();
     } else if(boardChecked && receiverChecked) {
         hideEntryFee();
         hideInsurance();
@@ -1072,7 +1121,7 @@ function togglePaymentOptions() {
         showInsurance();
         disableDuesOnly();
         // enableDuesOnly()
-        hideDues();
+        // hideDues();
     } else if(receiverChecked) {
         hideEntryFee();
         hideInsurance();
@@ -1083,7 +1132,7 @@ function togglePaymentOptions() {
         showInsurance();
         enableDuesOnly();
         showDues();
-        showIntl();
+        // showIntl();
     }
 }
 
@@ -1146,14 +1195,20 @@ function BoardSetup(e) {
         document.forms["showEntryForm"]["42Dues"].setAttribute('readonly', true);
     }
     
-    if (emeritusChecked) {
-        togglePaymentOptions();
-        
-        let currentRadios = document.getElementsByName("39EntFee");
-        for(var i=0; i < currentRadios.length; i++) {
-            currentRadios[i].checked = false;
-        }
-    } 
+    togglePaymentOptions();
+    
+    let currentRadios = document.getElementsByName("39EntFee");
+    for(var i=0; i < currentRadios.length; i++) {
+        currentRadios[i].checked = false;
+    }
+    if(isBoard) {
+        currentRadios[3].checked = true;
+    } else {
+        currentRadios[3].checked = false;
+    }
+    
+    // if (emeritusChecked) {
+    // } 
 
     recalcFeeTotal();
 }
@@ -1177,6 +1232,7 @@ function DuesOnlySetup() {
     toggleEntryDetails();
     toggleEntryFee();
     toggleInsurance();
+    toggleIntl();
     
     let currentRadios = document.getElementsByName("39EntFee");
     for(var i=0; i < currentRadios.length; i++) {
@@ -1193,16 +1249,21 @@ function checkCountry(event) {
     const inputValue = event.target.value;
     const isValid = validCountries.includes(inputValue);
     const messageElement = document.getElementById('message');
+    const lineItem = document.getElementById('International_Line');
 
     
     if (!isValid) {
         document.getElementById("43Intl").value='true';
         messageElement.textContent = 'International entrants will be charged a $15 fee to return artwork.';
         messageElement.style.display = "block";
+        lineItem.innerHTML = "<span>International Entry:</span> <span class='count'>$15</span>";
+        lineItem.style.display = "flex";
     } else {
         document.getElementById("43Intl").value='false';
         messageElement.style.display = "none";
         messageElement.textContent = '';
+        lineItem.style.display = "none";
+        lineItem.textContent = '';
     }
     recalcFeeTotal();
 }
@@ -2058,7 +2119,7 @@ function validateForm() {
 
             entFee = document.forms["showEntryForm"]["39EntFee"].value;
 
-            if (entFee != 25 && entFee != 30 && entFee != 40 && entFee != 45 && !isRcvr) {
+            if (entFee != 35 && entFee != 40 && entFee != 55 && entFee != 0 && !isRcvr) {
 
                 assignSkipButtonType("entFeeValidskip");
 
@@ -2066,7 +2127,7 @@ function validateForm() {
 
                 ValidationEditFocus = "39EntFee";
 
-                document.getElementById("entFeeValidMsg").innerHTML = "Please select the correct Entry Fee:<br />$25 for MPSGS member,<br />$30 for a non-MPSGS member with hand delivered works, or<br />$45 for a non-MPSGS member with mailed works.";
+                document.getElementById("entFeeValidMsg").innerHTML = "Please select the correct Entry Fee:<br />$35 for MPSGS member,<br />$40 for a non-MPSGS member with hand delivered works, or<br />$55 for a non-MPSGS member with mailed works.";
 
                 // disableFormInput();
 
@@ -2084,17 +2145,19 @@ function validateForm() {
     // ** Payment Method **
     document.getElementById("payMethValidMsg").innerHTML = "Please select a payment method from the drop-down list";
     payMeth = document.forms["showEntryForm"]["40PayMethod"].value;
+    // const isBoard = document.forms["showEntryForm"]["Board"].checked;
 
-    if (payMeth.length < 2 && feeTot > 0) {
+    // if (payMeth.length < 2 && feeTot > 0) {
 
-        // disableFormInput();
-        ValidationEditFocus = "40PayMethod";
-        document.getElementById("payMethValidChk").style.display = "block";
-        document.getElementById("editPayMethBtn").focus();
+    //     // disableFormInput();
+    //     ValidationEditFocus = "40PayMethod";
+    //     document.getElementById("payMethValidChk").style.display = "block";
+    //     document.getElementById("editPayMethBtn").focus();
 
-        return false;
+    //     return false;
 
-    }
+    // }
+
 
 
     // ** Other Paypal Name **

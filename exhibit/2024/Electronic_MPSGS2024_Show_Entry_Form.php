@@ -2,6 +2,7 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
+    
     // define variables and set to initial values
     $currentYear = "2024";
     $to = $subject = $i = $formdata = $confirmTo = $status = "";
@@ -15,8 +16,8 @@
     $paidDues = isset($_POST["42Dues"]) ? $_POST["42Dues"] : null;
 
     // who are we sending this to?
-    // $to = "miniartsupply@gmail.com, mpsgsfees@gmail.com, carey@careyestes.com";
-    $to = "carey@careyestes.com, miniartsupply@gmail.com";
+    $to = "miniartsupply@gmail.com, mpsgsfees@gmail.com, carey@careyestes.com, stevegill@cox.net";
+    // $to = "carey@careyestes.com, miniartsupply@gmail.com";
 
     // create a subject line that includes the artist's name
     
@@ -104,7 +105,7 @@
         $formdata .= "Instagram: " . $_POST["12Instagram"] . "<br />";
         $formdata .= "Facebook: " . $_POST["13Facebook"] . "<br />";
         
-        $formdata .= "Entry Details<br />";
+        $formdata .= "<b>Entry Details</b><br />";
         $formdata .= "Receiver: " . $_POST["12Receiver"] . "<br />";
     
         // ---------- Artwork 1 ---------- //
@@ -119,7 +120,7 @@
             $formdata .= "Depth: " . $_POST["sdeepw1"] .  ($_POST["sdeepf1"] ?? "") . "<br />";
         } else {
             $formdata .= "Framed Height: " . $_POST["fhighw1"];
-            if(isset($_POST["fhighf3"])) { 
+            if(isset($_POST["fhighf3"]) && $_POST["fhighf3"] != 0) { 
                 $formdata .= $_POST["fhighf1"]; 
             } 
             $formdata .= "<br />";
@@ -142,7 +143,7 @@
             $formdata .= "Depth: " . $_POST["sdeepw2"] .  ($_POST["sdeepf2"] ?? "") . "<br />";
         } else {
             $formdata .= "Framed Height: " . $_POST["fhighw2"];
-            if(isset($_POST["fhighf2"])) { 
+            if(isset($_POST["fhighf2"]) && $_POST["fhighf2"] != 0) { 
                 $formdata .= $_POST["fhighf2"];
             }
             $formdata .= "<br />";
@@ -165,7 +166,7 @@
             $formdata .= "Depth: " . $_POST["sdeepw3"] .  ($_POST["sdeepf3"] ?? "") . "<br />";
         } else {
             $formdata .= "Framed Height: " . $_POST["fhighw3"];
-            if(isset($_POST["fhighf3"])) { 
+            if(isset($_POST["fhighf3"]) && $_POST["fhighf3"] != 0) { 
                 $formdata .= $_POST["fhighf3"];
             }
             $formdata .= "<br />";
@@ -184,7 +185,7 @@
             $formdata .= "New Artist " . "<br />";
         }
         if(isset($_POST["CurrentMember"]) && $_POST["CurrentMember"] == "Yes") {
-            $formdata .= "Current MPGS Member" . "<br />";
+            $formdata .= "Current MPSGS Member" . "<br />";
         }
         if(isset($_POST["Emeritus"]) && $_POST["Emeritus"] == "Yes") {
             $formdata .= "Emeritus Member" . "<br />";
@@ -204,32 +205,46 @@
         if(isset($_POST["50ReceiveByPayPal"]) && $_POST["50ReceiveByPayPal"] == "Yes") {
             $formdata .= "I prefer to receive payments via PayPal for awards and/or sales.<br />";
         }
-        if(isset($_POST["43Intl"]) && $_POST["43Intl"]) {
+        if(isset($_POST["43Intl"]) && $_POST["43Intl"] === "true") {
             $formdata .= "I am an International Entrant<br />";
         }
         if(isset($_POST["42Dues"]) && $_POST["42Dues"]) {
             $formdata .= "I am paying my dues.<br />";
         }
-        if(isset($_POST["39EntFee"]) && $_POST["39EntFee"]) {
-            $formdata .= "Entry Fee: $" . $_POST["39EntFee"] . "<br />";
-        }
-        if(isset($_POST["41Ins"]) && $_POST["41Ins"]) {
-            $formdata .= "Additonal Insurance: $" . $_POST["41Ins"] . "<br />";
-        }
-        if(isset($_POST["43Donate"]) && $_POST["43Donate"]) {
-            $formdata .= "Donation: $" . $_POST["43Donate"] . "<br />";
+
+        if(isset($_POST["40PayMethod"]) && $_POST["40PayMethod"]) {
+            $formdata .= "Payment Method: " . $_POST["40PayMethod"] . "<br />";
         }
         
-        $formdata .= "Payment Method: " . $_POST["40PayMethod"] . "<br />";
-        
-        if(isset($_POST["43Donate"]) && $_POST["43Donate"] == "check") {
+        if(isset($_POST["40PayMethod"]) && $_POST["40PayMethod"] == "check") {
             $formdata .= "Check Number: " . $_POST["45ChkNo"] . "<br />";
         }
-        if(isset($_POST["43Donate"]) && $_POST["43Donate"] == "PayPal") {
-            $formdata .= "Paypal Information: " . $_POST["47paypalType"] . "<br />";
+        if(isset($_POST["40PayMethod"]) && $_POST["40PayMethod"] == "PayPal") {
+            $formdata .= "PayPal Information: " . $_POST["47paypalType"] . "<br />";
         }
+
+        if(isset($_POST["42Dues"]) && $_POST["42Dues"]) {
+            $formdata .= "$" . $_POST["42Dues"] . " : Dues<br />";
+        }
+        if(isset($_POST["43Intl"]) && $_POST["43Intl"] === "true") {
+            $formdata .= "$15 : International Fee <br />";
+        }
+        if(isset($_POST["39EntFee"]) && $_POST["39EntFee"]) {
+            $formdata .= "$" . $_POST["39EntFee"] . " : Entry Fee <br />";
+        }
+        if(isset($_POST["41Ins"]) && $_POST["41Ins"]) {
+            $formdata .= "$" . $_POST["41Ins"] . " : Additional Insurance<br />";
+        }
+        if(isset($_POST["43Donate"]) && $_POST["43Donate"]) {
+            $formdata .= "$" . $_POST["43Donate"] . " : Donation<br />";
+        }
+
+        $formdata .= "<b>$" . $_POST["44Total"] . " : Total</b><br />";
+
+        // echo $formdata;
+        // die;
         
-        $formdata .= "<b>Total: $" . $_POST["44Total"] . "</b><br />";
+        
 
         // Boilerplate html top
         $htmlEmail = "
@@ -253,10 +268,10 @@
             <body>
                 <p>Dear Artist,</p>
                 <p>Thank you for your submission to the MPSGS Exhibit 2024.  We look forward to seeing your artworks!  If you have any questions or comments, please contact me at <a href='mailto:miniartsupply@gmail.com'>miniartsupply@gmail.com</a>.</p>
-                <p><b>Nancy Still</b></p>
-                <p><i>President</i></p>
-                <p>The Miniature Painters, Sculptors and Gravers Society of Washington, DC</p>
-                <p><a href='http://www.mpsgs.org'>www.mpsgs.org</a></p>
+                <p><b>Nancy Still</b><br />
+                <i>President</i><br />
+                The Miniature Painters, Sculptors and Gravers Society of Washington, DC<br />
+                <a href='http://www.mpsgs.org'>www.mpsgs.org</a></p>
             </body>
             </html>    
         ";
@@ -316,10 +331,12 @@
                 
                 <h2 class="callout"><u>But wait, you must do the following:</u></h2>
                 
-                <h3>Make your Payment</h3>
-                <p id="statusMsg"></p>
-                <div id="paypal-button-container"></div>
-                <p id="conditionalContainer"></p>
+                <?php if(isset($_POST["40PayMethod"]) && $_POST["40PayMethod"]): ?>
+                    <h3>Make your Payment</h3>
+                    <p id="statusMsg"></p>
+                    <div id="paypal-button-container"></div>
+                    <p id="conditionalContainer"></p>
+                <?php endif ?>
     
                 <?php if(!$duesOnly): ?>
                     <section id="Needs_Tags">
@@ -431,11 +448,14 @@
         
         <script type="text/javascript">
             var pdf,HTML_Width,HTML_Height;
+            var saveAsImageBtn = document.getElementById('saveAsImageBtn');
         
 
             function getPaymentType() {
                 var payMethod = "<?php echo $_POST["40PayMethod"]; ?>";
                 var total = "<?php echo $total; ?>";
+
+                console.log(payMethod);
 
                 if (payMethod == "cash" && document.getElementById("conditionalContainer")) {
                     document.getElementById("conditionalContainer").innerHTML = "<p>If paying by cash, mail to: <br /><b>MPSGS Treasurer</b><br />PO BOX 281<br />Simpsonville, MD 21150-0281</p>";
@@ -493,24 +513,27 @@
 
             }
 
-            document.getElementById('saveAsImageBtn').addEventListener('click', function() {
-                html2canvas(document.getElementById('CardContent')).then(function(canvas) {
-                    // Convert the canvas to a data URL
-                    var imgData = canvas.toDataURL('image/jpeg');
-
-                    // Create a link and set the URL as the href
-                    var link = document.createElement('a');
-                    link.href = imgData;
-                    link.download = 'MPSGS-Exhibit-2024-Tags.jpeg'; // Specify the download filename
-
-                    // Append the link to the document and trigger the click event
-                    document.body.appendChild(link);
-                    link.click();
-
-                    // Clean up
-                    document.body.removeChild(link);
+            if(saveAsImageBtn) {
+                document.getElementById('saveAsImageBtn').addEventListener('click', function() {
+                    html2canvas(document.getElementById('CardContent')).then(function(canvas) {
+                        // Convert the canvas to a data URL
+                        var imgData = canvas.toDataURL('image/jpeg');
+    
+                        // Create a link and set the URL as the href
+                        var link = document.createElement('a');
+                        link.href = imgData;
+                        link.download = 'MPSGS-Exhibit-2024-Tags.jpeg'; // Specify the download filename
+    
+                        // Append the link to the document and trigger the click event
+                        document.body.appendChild(link);
+                        link.click();
+    
+                        // Clean up
+                        document.body.removeChild(link);
+                    });
                 });
-            });
+            }
+
 
             window.addEventListener('DOMContentLoaded', (event) => {
                 getPaymentType();

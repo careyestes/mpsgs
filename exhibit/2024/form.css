@@ -196,6 +196,10 @@ input[type="button"] {
     cursor: pointer;
 }
 
+.button-wrapper {
+    min-height: 4rem;
+}
+
 .button-wrapper input { 
     display: block;
 }
@@ -227,6 +231,40 @@ input[type="button"] {
 
 .required {
     color: red;
+}
+
+.loading {
+    display: inline-block;
+    border: 0.4rem solid #CCC;
+    border-top: 0.4rem solid var(--main-color); 
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 1rem;
+    vertical-align: middle;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.hidden {
+    display: none;
+}
+
+.loadingText {
+    color: #555;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+.highlight {
+    margin-right: 2px;
+    padding: 3px 6px 0;
+    background: orange;
+    border-radius: 5px;
+    font-size: 12px;
 }
 
 .sr-only {
@@ -297,16 +335,6 @@ input[type="button"] {
     font-weight: 700;
 }
 
-.total-container {
-    font-size: 2rem;
-    font-weight: 700;
-}
-.total-container .dollar-sign {
-    font-size: 2rem;
-}
-
-
-
 /* Helpers */
 
 .flex {
@@ -357,6 +385,39 @@ input[type="button"] {
 
 .alert.error {
     border-color: red;
+}
+
+.add-ups {
+    max-width: 20rem;
+}
+
+.add-ups p > span {
+    flex: 0 0 13rem;
+}
+
+.add-ups p > span.count {
+    flex: 0 0 auto;
+}
+
+.total-container {
+    gap: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+.total-container > div.total-text {
+    flex: 0 0 12rem;
+}
+
+.total-container .dollar-sign {
+    font-size: 2rem;
+}
+
+.total-container .total-value {
+    display: flex;
+}
+.total-container .total-value > input {
+    width: 20rem;
+    padding-left: 0.25rem;
 }
 
 

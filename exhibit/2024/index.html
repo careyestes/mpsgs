@@ -7,12 +7,12 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@200;300;400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="form.css?v05-01-2024">
-        <link rel="stylesheet" href="printform.css?v04-16-2024">
+        <link rel="stylesheet" href="form.css?v06-03-2024-21:36">
+        <link rel="stylesheet" href="printform.css?v06-03-2024-21:36">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-        <script src="html2canvas.js?v04-01-2024"></script>  
-        <script src="form.js?v05-01-2024"></script>
+        <script src="html2canvas.js?v06-03-2024-21:36"></script>  
+        <script src="form.js?v08-02-2024-17:15"></script>
     </head>
     <body onload="letterCodeLists(); payMethodHandler('init'); document.forms['showEntryForm']['01FirstName'].focus();">
 
@@ -147,9 +147,9 @@
 
                 <hr>
                 
-                <label for="Receiver">Artwork mailed/delivered to (Your Receiver) <span class="required">*</span></label>
+                <label for="Receiver">Artwork mailed/delivered to (Your Receiver)</label>
                 <span class="nameTipValid">
-                    <input id="Receiver" placeholder="Enter Receiver Name" type="text" name="12Receiver" maxlength=50 value="" required />
+                    <input id="Receiver" placeholder="Enter Receiver Name" type="text" name="12Receiver" maxlength=50 value="" />
                 </span>
                 
                 <hr>
@@ -510,14 +510,14 @@
 
                 <label class="checkboxcontainer">
                     <input id="New_Artist" type="checkbox" name="NewArtist" value="Yes" onchange="NewArtistSetup(event);"/>
-                    <span>I am a <strong>new artist</strong> to this exhibition.</span>
+                    <span>I am a <strong>New Artist</strong> to this exhibition.</span>
                 </label>
 
                 <label for="CurrentMember" class="checkboxcontainer">
                     <input id="CurrentMember" type="checkbox" value="Yes" name="CurrentMember" onchange="CurrentMemberSetup(event);">
                     <span>
                         I am a <strong>Current MPSGS</strong> Member.<br>
-                        <small>Your $25 annual dues will be added to the total amount paid below</small>
+                        <small><span class="highlight">NOTE</span> <strong>Your $30 annual dues will be added to the total amount paid below</strong></small>
                     </span>
                 </label>
 
@@ -548,11 +548,6 @@
             <!-- PAYMENT SECTION -->
             <section>
                 <h3>Payment</h3>
-                
-                <!-- <label id="Intl_Container" for="43Intl" class="checkboxcontainer">
-                    <input type="checkbox" name="43Intl" id="43Intl" value=15 onchange="recalcFeeTotal()" />
-                    <span>I am an <strong>International Entrant</strong> ($15 fee to return artwork)</span>
-                </label> -->
 
                 <label for="DuesOnly" class="checkboxcontainer">
                     <input id="DuesOnly" type="checkbox" value="Yes" name="DuesOnly" onchange="DuesOnlySetup();">
@@ -575,28 +570,29 @@
                     <div id="entFeeEntry">
                         <div class="titleChkNoValid flex">
                             <div class="flex flex-0 align-center">
-                                <input type="radio" id="entryFee1" name="39EntFee" value="30" onchange="recalcFeeTotal()">
+                                <input type="radio" id="entryFee1" name="39EntFee" value="35" onchange="recalcFeeTotal()">
                                 <label class="inline" for="entryFee1">
-                                    <div>$30</div>
+                                    <div>$35</div>
                                     <small>MPSGS Member</small>
                                 </label>
                             </div>
         
                             <div class="flex flex-0 align-center">
-                                <input type="radio" id="entryFee2" name="39EntFee" onchange="recalcFeeTotal()" value="35">
+                                <input type="radio" id="entryFee2" name="39EntFee" onchange="recalcFeeTotal()" value="40">
                                 <label class="inline" for="entryFee2">
-                                    <div>$35</div> 
+                                    <div>$40</div> 
                                     <small>Non-MPSGS Member Hand Delivered</small>
                                 </label>
                             </div>
         
                             <div class="flex flex-0 align-center">
-                                <input type="radio" id="entryFee3" name="39EntFee" onchange="recalcFeeTotal()" value="50">
+                                <input type="radio" id="entryFee3" name="39EntFee" onchange="recalcFeeTotal()" value="55">
                                 <label class="inline" for="entryFee3">
-                                    <div>$50</div> 
+                                    <div>$55</div> 
                                     <small>Non-MPSGS Member Mailed</small>
                                 </label>
                             </div>
+                            <input type="hidden" id="entryFee4" name="39EntFee" value="0" />
                         </div>
                         <div id="entFeeValidChk" class="alert error">
                             <span id="entFeeValidMsg"></span>
@@ -634,9 +630,26 @@
                     </div>
                 </div>
 
+                <hr />
+
+                <div class="add-ups">
+                    <p style="display:none;" class="entry-fee-line-item" id="Entry_Fee_Line"></p>
+                    <p style="display:none;" class="dues-line-item" id="Dues_Line"></p>
+                    <p style="display:none;" class="international-line-item" id="International_Line"></p>
+                    <p style="display:none;" class="insurance-line-item" id="Insurance_Line"></p>
+                    <p style="display:none;" class="donation-line-item" id="Donation_Line"></p>
+                </div>
+                <div class="flex no-wrap align-center total-container">
+                    <div class="flex-0 spacing-0 total-text">Total: </div>
+                    <div id="Total_Container" class="titleChkNoValid flex-0 total-value">
+                        <span class="dollar-sign">$</span>
+                        <input id="44Total" class="spacing-0" value=0 type="number" name="44Total" maxlength=8 onfocus="recalcFeeTotal()" readonly>
+                    </div>
+                </div>
+
                 <!-- Payment Type -->
                 <div id="Payment_Type_Container" class="priceTipValid font-size-large spacing-3">
-                    <div class="spacing-75">Payment Method</div>
+                    <h3>Payment Method</h3>
                     <div class="flex">
                         <!-- <div class="flex align-center flex-0">
                             <input type="radio" id="paymentType1" name="40PayMethod" value="cash" onchange="payMethodHandler('payMeth')">
@@ -648,7 +661,7 @@
                         </div>
                         <div class="flex align-center flex-0">
                             <input type="radio" id="paymentType3" name="40PayMethod" value="PayPal" onchange="payMethodHandler('payMeth')">
-                            <label class="inline" for="paymentType3" style="position: relative;top: 2px;padding-left: 4px;">Paypal</label>
+                            <label class="inline" for="paymentType3" style="position: relative;top: 2px;padding-left: 4px;">PayPal</label>
                         </div>
                     </div>
                     <div id="payMethValidChk" class="alert error">
@@ -694,20 +707,20 @@
         
                     <!-- Paypal -->
                     <div id="Paypal_Type" class="paymentMethods" hidden>
-                        <p class="font-size-large text-align-center all-caps">Paypal Payment Instructions</p>
-                        <p>Select the Paypal account you would like to use:</p>
+                        <p class="font-size-large text-align-center all-caps">PayPal Payment Instructions</p>
+                        <p>Select the PayPal account you would like to use:</p>
                         <div class="flex align-center flex-0" style="margin: 1rem 0">
                             <div class="flex align-center">
                                 <input type="radio" id="myPaypal" name="47paypalType" value="myPayPal" onchange="paypalInstructions()">
-                                <label class="inline" for="myPaypal" style="position: relative;top: 2px;padding-left: 4px;">My Paypal</label>
+                                <label class="inline" for="myPaypal" style="position: relative;top: 2px;padding-left: 4px;">My PayPal</label>
                             </div>
                             <div class="flex align-center">
                                 <input type="radio" id="anotherPaypal" name="47paypalType" value="anotherPaypal" onchange="paypalInstructions()">
-                                <label class="inline" for="anotherPaypal" style="position: relative;top: 2px;padding-left: 4px;">Another Paypal Account</label>
+                                <label class="inline" for="anotherPaypal" style="position: relative;top: 2px;padding-left: 4px;">Another PayPal Account</label>
                             </div>
                             <div class="flex align-center">
                                 <input type="radio" id="payLater" name="47paypalType" value="payLater" onchange="paypalInstructions()">
-                                <label class="inline" for="payLater" style="position: relative;top: 2px;padding-left: 4px;">Pay Later via Paypal</label>
+                                <label class="inline" for="payLater" style="position: relative;top: 2px;padding-left: 4px;">Pay Later via PayPal</label>
                             </div>
                         </div>
                         
@@ -729,23 +742,12 @@
                         </div>
 
                         <div id="Later_Type" class="paypalMethods" hidden>
-                            <p>You can pay later via Paypal if you prefer. Make a note of your total here and when you are ready to pay, login to Paypal and send your payment to mpsgsfees@gmail.com. 
+                            <p>You can pay later via PayPal if you prefer. Make a note of your total here and when you are ready to pay, login to PayPal and send your payment to mpsgsfees@gmail.com. 
                             </p>
                         </div>
                         
                     </div>
                 </div>
-
-                <hr>
-
-                <div class="flex no-wrap align-center total-container">
-                    <div class="flex-0 spacing-0">Total: <span class="dollar-sign">$</span></div>
-                    <div id="Total_Container" class="titleChkNoValid">
-                        <input id="44Total" class="spacing-0" value=0 type="number" name="44Total" maxlength=8 onfocus="recalcFeeTotal()" readonly>
-                    </div>
-                </div>
-
-                <hr>
 
             </section>
 
@@ -767,14 +769,15 @@
                 <div style="padding: 0.25rem 1.5rem; background: rgb(235,235,235);border-radius: 1rem;">
                     <p>By submitting this form, the artist <strong>agrees to all terms and conditions</strong> in the Prospectus.</p>
                     <p>Wait until you see the Confirmation Page <strong>before</strong> leaving the site.</p>
-                    <p>Only Press "Submit" <strong>ONCE</strong>.</p>
                 </div>
             </section>
-    
+            
             <!-- SUBMISSION SECTION -->
             <section id="Submission_Button">
-                <div class="button-wrapper flex spacing-3">
+                <p>Only Press "Submit" <strong>ONCE</strong>.</p>
+                <div class="button-wrapper flex align-center spacing-3">
                     <input type="submit" id="SubmitBtn" value="Submit Your Form">
+                    <div id="Loading_Text_Container" class="loadingText hidden"><span id="loading" class="loading"></span> Loading</div>
                 </div>
             </section>
         </form>
@@ -819,6 +822,19 @@
 
                 });
             };
+            
+            document.getElementById('electEntForm').addEventListener('submit', function(e) {
+                var submitBtn = document.getElementById('SubmitBtn');
+                var loading = document.getElementById('Loading_Text_Container');
+
+                submitBtn.disabled = true;
+                submitBtn.style.display = "none";
+                loading.classList.remove('hidden');
+
+                // Allow form to submit normally
+                return true;
+            });
+
         </script>
     </body>
 </html>
