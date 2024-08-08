@@ -7,12 +7,12 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@200;300;400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="form.css?v06-03-2024-21:36">
+        <link rel="stylesheet" href="form.css?v08-07-2024-21:36">
         <link rel="stylesheet" href="printform.css?v06-03-2024-21:36">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
         <script src="html2canvas.js?v06-03-2024-21:36"></script>  
-        <script src="form.js?v08-02-2024-17:15"></script>
+        <script src="form.js?v08-07-2024-17:15"></script>
     </head>
     <body onload="letterCodeLists(); payMethodHandler('init'); document.forms['showEntryForm']['01FirstName'].focus();">
 
@@ -592,7 +592,7 @@
                                     <small>Non-MPSGS Member Mailed</small>
                                 </label>
                             </div>
-                            <input type="hidden" id="entryFee4" name="39EntFee" value="0" />
+                            <input type="radio" id="entryFee4" name="39EntFee" value="0" />
                         </div>
                         <div id="entFeeValidChk" class="alert error">
                             <span id="entFeeValidMsg"></span>

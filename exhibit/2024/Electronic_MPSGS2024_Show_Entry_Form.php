@@ -223,6 +223,9 @@
             $formdata .= "PayPal Information: " . $_POST["47paypalType"] . "<br />";
         }
 
+        var_dump($_POST["39EntFee"]);
+        die;
+
         if(isset($_POST["42Dues"]) && $_POST["42Dues"]) {
             $formdata .= "$" . $_POST["42Dues"] . " : Dues<br />";
         }
